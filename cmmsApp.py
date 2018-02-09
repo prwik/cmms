@@ -1,10 +1,16 @@
 from flask import Flask
+import subprocess
 
 app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "Fask Index Page"
+    return "Flask Index Page"
+
+@app.route("/deploy")
+def deploy():
+    subprocess.Popen('git pull')
+    return
 
 if __name__ == "__main__":
     app.run()
