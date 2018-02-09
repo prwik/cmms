@@ -6,7 +6,7 @@ app = Flask(__name__)
 def hello():
     return "Flask Index Page"
 
-@app.route("/deploy")
+@app.route("/test")
 def deploy():
     return "success"
 
