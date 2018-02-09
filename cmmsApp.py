@@ -10,7 +10,7 @@ def hello():
 @app.route("/deploy")
 def deploy():
     subprocess.Popen('git pull')
-    return
+    return "success"
 
 if __name__ == "__main__":
     app.run()
