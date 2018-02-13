@@ -1,0 +1,46 @@
+class App {
+	constructor {
+		state = {
+			user: user,
+			token: token,
+			limit: default_limit,
+			sort: default_sort,
+			sites: {sites_data dictionary},
+		}
+	}
+}
+
+class Site {
+	constructor {
+		state = {
+			name: props.name,
+			address: props.addess,
+			contacts: {contacts dictionary},
+			equipment: {equipment dictionary},
+		}
+	}
+}
+
+class Equipment {
+	constructor {
+		state = {
+			name: props.name,
+			model: props.model,
+			site_loc: props.site_loc,
+			aquisition_date: props.accdate,
+			maintenance_history: props.{maintenance_hisotry dictionary},
+			contacts: props.{contacts dictionary},
+		}
+	}
+}
+
+function Maintenance (props) {
+	props {
+		emergency: Bool,
+		servicer: {dictionary},
+		datetime: datetime,
+		partscost: float,
+		partslist: {dictionary},
+		schedule_assoc: int,
+	}
+}
