@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <style>
+    body{
+      background-color: #f7f7f7;
+      padding: 0;
+      margin: 0;
+      font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    }
+    .card{
+      border-radius: 5px;
+      background-color: #ffff;
+      min-height: 100px;
+      margin: 10px;
+      box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
+        0 0 0 1px rgba(0,0,0,0.04);
+      padding: 7px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1.5fr 1fr 0.5fr 1fr;
+      grid-column-gap: 2px;
+      grid-template-areas:
+      "header header"
+      "content content"
+      ". ."
+      "history new"
+    }
+    .card_title{
+      font-size: 1.3em;
+      margin-bottom: 4px;
+      grid-area: header;
+    }
+    .card_content{
+      font-size: 0.8em;
+      color: #757575;
+      grid-area: content;
+    }
+    .header{
+      height: 50px;
+      width: 100%;
+      background-color: #ffff;
+      padding: 5px;
+      padding-bottom: 0;
+      box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
+        0 0 0 1px rgba(0,0,0,0.04);
+    }
+    .history_button{
+      font-size: 0.8em;
+      color: #ffff;
+      background-color: #6a98e2;
+      border-radius: 4px;
+      grid-area: history;
+      text-align: center;
+      padding-top: 6px;
+    }
+    .new_button{
+      font-size: 0.8em;
+      color: #ffff;
+      background-color: #6a98e2;
+      border-radius: 4px;
+      grid-area: new;
+      text-align: center;
+      padding-top: 6px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="menu.svg" height="30px" alt="">
+  </div>
+  <div class="card">
+    <div class="card_title">
+      Cooling Tower 1
+    </div>
+    <div class="card_content">Model#: AHU374 <br>Last Service Date: 2017-09-01</div>
+    <div class="history_button">View History</div>
+    <div class="new_button">New Entry</div>
+  </div>
+  <div class="card">
+    <div class="card_title">
+      Cooling Tower 2
+    </div>
+    <div class="card_content">Model#: AHU374 <br>Last Service Date: 2018-02-01</div>
+    <div class="history_button">View History</div>
+    <div class="new_button">New Entry</div>
+  </div>
+  <div class="card">
+    <div class="card_title">
+      Compressor 2
+    </div>
+    <div class="card_content">Model#: SHP5436 <br>Last Service Date: 2017-06-01</div>
+    <div class="history_button">View History</div>
+    <div class="new_button">New Entry</div>
+  </div>
+</body>
+</html>
