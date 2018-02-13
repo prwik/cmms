@@ -15,8 +15,8 @@ class Site {
 		state = {
 			name: props.name,
 			address: props.addess,
-			contacts: {contacts dictionary},
-			equipment: {equipment dictionary},
+			contacts: props.{contacts dictionary},
+			equipment: props.{equipment dictionary},
 		}
 	}
 }
