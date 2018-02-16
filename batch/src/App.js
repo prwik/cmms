@@ -33,9 +33,26 @@ class Navbar extends Component {
 }
 
 class Content extends Component {
+  constructor(){
+    super();
+    this.state = {
+      sites : []
+    };
+  }
+  componentDidMount(){
+    fetch('https://randomuser.me/api?results=10')
+      .then((results) => results.json())
+      .then((responseJson) => {
+        console.log(responseJson.results)
+        this.setState({
+          sites: responseJson.results.map((name)=> (<SiteCard key={name.id.value} name={name.email} />))
+        });
+      });
+  }
+
   render() {
     return(
-      <SiteCard name="Tesla"/>
+      this.state.sites
     )
   }
 }
