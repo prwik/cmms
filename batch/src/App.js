@@ -32,18 +32,20 @@ class Navbar extends Component {
   }
 }
 
-class SiteCard extends Component {
-  render(){
-    return (
-      <div className="card"></div>
-    );
-  }
-}
-
 class Content extends Component {
   render() {
     return(
-      <SiteCard />
+      <SiteCard name="Tesla"/>
     )
+  }
+}
+
+class SiteCard extends Component {
+  render(){
+    return (
+      <div className="card">
+        {this.props.name}
+      </div>
+    );
   }
 }
