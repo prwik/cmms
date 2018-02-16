@@ -1,28 +1,79 @@
-.App {
+body{
+  background-color: #f7f7f7;
+  padding: 0;
+  margin: 0;
+  font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+}
+.card{
+  border-radius: 5px;
+  background-color: #ffff;
+  min-height: 100px;
+  margin: 10px;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
+    0 0 0 1px rgba(0,0,0,0.04);
+  padding: 7px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1.5fr 1fr 0.5fr 1fr;
+  grid-column-gap: 3px;
+  grid-template-areas:
+  "header header"
+  "content content"
+  ". ."
+  "history new"
+}
+.card_title{
+  font-size: 1.3em;
+  margin-bottom: 4px;
+  grid-area: header;
+}
+.card_content{
+  font-size: 0.8em;
+  color: #757575;
+  grid-area: content;
+}
+.navbar{
+  height: 40px;
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: #6ad4e2;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
+    0 0 0 1px rgba(0,0,0,0.04);
+  display: grid;
+  grid-template-columns: 35px 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+  "menu filler"
+}
+
+.menu_button{
+  grid-area: menu;
+  display: gird;
+}
+
+.menu_lines{
+  margin: 5px;
+  border-radius: 2px;
+  height: 3px;
+  background-color: #ffff;
+  align-self: center;
+}
+
+.history_button{
+  font-size: 0.8em;
+  color: #ffff;
+  background-color: #6a98e2;
+  border-radius: 4px;
+  grid-area: history;
   text-align: center;
+  padding-top: 6px;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.new_button{
+  font-size: 0.8em;
+  color: #ffff;
+  background-color: #6a98e2;
+  border-radius: 4px;
+  grid-area: new;
+  text-align: center;
+  padding-top: 6px;
 }
