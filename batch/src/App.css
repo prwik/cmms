@@ -4,7 +4,7 @@ body{
   margin: 0;
   font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
 }
-.card{
+.site_card{
   border-radius: 5px;
   background-color: #ffff;
   min-height: 100px;
@@ -12,26 +12,36 @@ body{
   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
     0 0 0 1px rgba(0,0,0,0.04);
   padding: 7px;
+  padding-bottom: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1.5fr 1fr 0.5fr 1fr;
+  grid-template-rows: 1.5fr 1fr 0.5fr 0.5fr;
   grid-column-gap: 3px;
   grid-template-areas:
   "header header"
   "content content"
   ". ."
-  "history new"
+  "footer footer"
 }
+
 .card_title{
   font-size: 1.3em;
   margin-bottom: 4px;
   grid-area: header;
 }
+
 .card_content{
   font-size: 0.8em;
   color: #757575;
   grid-area: content;
 }
+
+.card_footer{
+  font-size: 0.4em;
+  color: #757575;
+  grid-area: footer;
+}
+
 .navbar{
   height: 40px;
   width: 100%;

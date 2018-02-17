@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -45,7 +44,12 @@ class Content extends Component {
       .then((responseJson) => {
         console.log(responseJson.results)
         this.setState({
-          sites: responseJson.results.map((name)=> (<SiteCard key={name.id.value} name={name.email} />))
+          sites: responseJson.results.map((name)=> (<SiteCard
+            key={name.login.username}
+            name={name.email}
+            city={name.location.city}
+            state={name.location.state}
+            regDate={name.registered}/>))
         });
       });
   }
@@ -60,8 +64,17 @@ class Content extends Component {
 class SiteCard extends Component {
   render(){
     return (
-      <div className="card">
-        {this.props.name}
+      <div className="site_card">
+        <div className="card_title">
+          {this.props.name}
+        </div>
+        <div className="card_content">
+          City: {this.props.city} <br/>
+          State: {this.props.state}
+        </div>
+        <div className="card_footer">
+          {this.props.regDate}
+        </div>
       </div>
     );
   }
