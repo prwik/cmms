@@ -15,7 +15,7 @@ def hello():
     return "Flask Index Page"
 
 @app.route("/equipment")
-def deploy():
+def equipment():
     site_id = request.args.get('id')
     sql = "select name, description from prod.equipment where site_id={0}".format(site_id)
     res = engine.execute(sql).fetchall()
@@ -23,6 +23,10 @@ def deploy():
     for row in res:
         response.append({'name': row[0], 'description': row[1]})
     return json.dumps(response)
+
+@app.route("/test")
+def test():
+    return "Successful Test"
 
 if __name__ == "__main__":
     app.run()
