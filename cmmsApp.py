@@ -2,6 +2,7 @@ from flask import Flask
 from sqlalchemy import create_engine
 from config import con_string
 import json
+from flask import request
 
 engine = create_engine(con_string)
 
@@ -13,8 +14,9 @@ app = Flask(__name__)
 def hello():
     return "Flask Index Page"
 
-@app.route("/equipment/<site_id>")
-def deploy(site_id):
+@app.route("/equipment")
+def deploy():
+    site_id = request.args.get('id')
     sql = "select name, description from prod.equipment where site_id={0}".format(site_id)
     res = engine.execute(sql).fetchall()
     response = []
