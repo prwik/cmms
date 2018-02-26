@@ -32,6 +32,28 @@ class Navbar extends Component {
 }
 
 class Content extends Component {
+  constructor() {
+    super();
+    this.state = {
+      display: <Sites />
+    }
+  }
+
+  changeContent(contentType){
+    if(contentType == 'sites') {
+      this.setState({
+        display: <Sites />
+      });
+    }
+  }
+
+  render() {
+    return (this.state.display);
+  }
+}
+
+
+class Sites extends Component {
   constructor(){
     super();
     this.state = {
