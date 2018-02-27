@@ -17,7 +17,6 @@ export default App;
 class Navbar extends Component {
   render() {
     function click(){
-      console.log('click');
     }
     return (
       <div className="navbar">
@@ -35,14 +34,19 @@ class Content extends Component {
   constructor() {
     super();
     this.state = {
-      display: <Sites />
-    }
+      display: <Sites route={this.changeContent.bind(this)}/>
+    };
   }
 
-  changeContent(contentType){
-    if(contentType == 'sites') {
+  changeContent(contentType) {
+    if(contentType === 'sites') {
       this.setState({
-        display: <Sites />
+        display: <Sites route={this.changeContent.bind(this)}/>
+      });
+    }
+    else if(contentType === 'equipment') {
+      this.setState({
+        display: "Equipment page"
       });
     }
   }
@@ -71,7 +75,8 @@ class Sites extends Component {
             name={name.email}
             city={name.location.city}
             state={name.location.state}
-            regDate={name.registered}/>))
+            regDate={name.registered}
+            route={this.props.route}/>))
         });
       });
   }
@@ -86,7 +91,7 @@ class Sites extends Component {
 class SiteCard extends Component {
   render(){
     return (
-      <div className="site_card">
+      <div className="site_card" onClick={() => {this.props.route('equipment')}}>
         <div className="card_title">
           {this.props.name}
         </div>
