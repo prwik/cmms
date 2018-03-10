@@ -27,11 +27,11 @@ def equipment():
 @app.route("/test")
 def test():
     site_id = request.args.get('id')
-    sql = "select name, description from test.equipment where site_id={0}".format(site_id)
+    sql = "select name, description, serial_number, make from test.equipment where site_id={0}".format(site_id)
     res = engine.execute(sql).fetchall()
     response = []
     for row in res:
-        response.append({'name': row[0], 'description': row[1]})
+        response.append({'name': row[0], 'description': row[1], 'serial_number': row[2], 'manufacturer': row[3]})
     return json.dumps(response)
 
 if __name__ == "__main__":
