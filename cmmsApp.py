@@ -26,7 +26,13 @@ def equipment():
 
 @app.route("/test")
 def test():
-    return "Successful Test"
+    site_id = request.args.get('id')
+    sql = "select name, description from test.equipment where site_id={0}".format(site_id)
+    res = engine.execute(sql).fetchall()
+    response = []
+    for row in res:
+        response.append({'name': row[0], 'description': row[1]})
+    return json.dumps(response)
 
 if __name__ == "__main__":
     app.run()
