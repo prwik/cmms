@@ -1,9 +1,11 @@
 body{
-  background-color: #f7f7f7;
+/*  background-color: #f7f7f7;*/
+  background-color: #ffffff;
   padding: 0;
   margin: 0;
   font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
 }
+/*
 .card{
   border-radius: 5px;
   background-color: #ffff;
@@ -22,18 +24,44 @@ body{
   ". ."
   "history new"
 }
+*/
+.card{
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
+    0 0 0 1px rgba(0,0,0,0.04);
+  margin: 5px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1.5fr 1fr 0.5fr 1fr;
+  grid-column-gap: 3px;
+  grid-template-areas:
+  "header header"
+  "content content"
+  ". ."
+  "history new"
+}
+
 .card_title{
   font-size: 1.3em;
   margin-bottom: 4px;
   grid-area: header;
 }
+
 .card_content{
   font-size: 0.8em;
   color: #757575;
   grid-area: content;
 }
+
+.cardtitle{
+  padding-top: 20px;
+}
+
+.cardsubtitle{
+  padding-top: 0px;
+  padding-bottom: 3px;
+}
+/*
 .navbar{
-  height: 40px;
+  height: 50px;
   width: 100%;
   margin-bottom: 20px;
   background-color: #6ad4e2;
@@ -44,6 +72,12 @@ body{
   grid-template-rows: 1fr;
   grid-template-areas:
   "menu filler"
+}*/
+
+.navbar{
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
+    0 0 0 1px rgba(0,0,0,0.04);
 }
 
 .menu_button{
@@ -52,9 +86,10 @@ body{
 }
 
 .menu_lines{
-  margin: 5px;
+  margin: 10px;
   border-radius: 2px;
   height: 3px;
+  width: 35px;
   background-color: #ffff;
   align-self: center;
 }
@@ -67,7 +102,9 @@ body{
   grid-area: history;
   text-align: center;
   padding-top: 6px;
+  margin: 6px;
 }
+
 .new_button{
   font-size: 0.8em;
   color: #ffff;
@@ -76,4 +113,19 @@ body{
   grid-area: new;
   text-align: center;
   padding-top: 6px;
+}
+
+.button{
+  margin: 5px;
+  border-radius: 3px;
+  text-align: center;
+  padding-top: 6px;
+}
+
+.image{
+  width: 318px;
+}
+
+.link{
+  color: #6a98e2;
 }
