@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
-import {comp_test_data} from './testdata';
-import HistoryCard from './components/HistoryCard';
-import EquipmentCard from './components/EquipmentCard';
+//import {comp_test_data} from './testdata';
 import Navigation from './components/Navigation';
-import SiteCard from './components/SiteCard';
 import Content from './components/Content';
 
 export default class App extends Component {
+/*
   constructor() {
     super();
     this.state = {
@@ -53,12 +51,12 @@ export default class App extends Component {
       });
     }
   }
-
+*/
   render() {
     return (
       <div>
-        <Navigation handleClick={this.handleClick}/>
-        <Content onClick={this.handleClick} view={this.state.view} sites={this.state.sites}/>
+        <Navigation/>
+        <Content/>
       </div>
     );
   }

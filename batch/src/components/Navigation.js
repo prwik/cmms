@@ -7,10 +7,11 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  //UncontrolledDropdown,
+  //DropdownToggle,
+  //DropdownMenu,
+  //DropdownItem 
+} from 'reactstrap';
 
 export default class Navigation extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ export default class Navigation extends Component {
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
               <NavItem>
-                <NavLink onClick={()=> (this.props.handleClick(null))}>Sites</NavLink>
+                <NavLink href='/'>Sites</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/">Settings</NavLink>

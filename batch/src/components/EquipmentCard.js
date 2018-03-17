@@ -1,32 +1,30 @@
 import React, { Component } from 'react';
 import {
   Card,
-  CardImg,
+  //CardImg,
   CardText,
   CardBody,
   CardTitle,
   CardHeader,
   CardSubtitle,
-  CardLink,
-  Button } from 'reactstrap';
+  //CardLink,
+  //Button 
+} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 export default class EquipmentCard extends Component {
 
   render(){
-    let contacts = this.props.contacts.map((cont)=>(' ' + cont.firstname + ' ' + cont.lastname + ' ' + cont.phone))
-    console.log(this.props.data.history)
-
     return (
       <div>
         <Card>
-        <CardHeader>{this.props.name}</CardHeader>
+        <CardHeader>{ this.props.serial }</CardHeader>
           <CardBody>
-            <CardImg className='image' top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-            <CardTitle className='cardtitle'>{this.props.shortdesc}</CardTitle>
-            <CardSubtitle className='cardsubtitle'>Contacts:{contacts}</CardSubtitle>
-            <CardText>{this.props.desc}</CardText>
-            <CardLink href='#' onClick={() => (this.props.onClick(this.props.data))}>History</CardLink>
-            <CardLink href='#'>New Entry</CardLink>
+            <CardTitle className='cardtitle'>{ this.props.name }</CardTitle>
+            <CardSubtitle className='cardsubtitle'>{ this.props.manufacturer }</CardSubtitle>
+            <CardText>{ this.props.description }</CardText>
+            <Link to='/'>History</Link>
+            <Link to='/'>New Entry</Link>
           </CardBody>
         </Card>
       </div>
