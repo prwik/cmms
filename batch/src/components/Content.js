@@ -4,16 +4,6 @@ import Equipment from './Equipment';
 import { Route, Switch } from 'react-router-dom';
 
 export default class Content extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      sites : [],
-      click: 0,
-      view: null,
-    };
-    this.handleClick = this.props.onClick;
-    //this.handleClick = this.handleClick.bind(this);
-  }
   render() {
   	return (
   	<div>
@@ -23,13 +13,5 @@ export default class Content extends Component {
   		</Switch>
   	</div>
   	);
-  	/*
-      if (this.props.view) {
-        return (this.props.view);
-      }
-      else {
-        return (this.props.sites);
-      }
-     */
   }
 }

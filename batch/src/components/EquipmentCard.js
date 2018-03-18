@@ -23,8 +23,8 @@ export default class EquipmentCard extends Component {
             <CardTitle className='cardtitle'>{ this.props.name }</CardTitle>
             <CardSubtitle className='cardsubtitle'>{ this.props.manufacturer }</CardSubtitle>
             <CardText>{ this.props.description }</CardText>
-            <Link to='/'>History</Link>
-            <Link to='/'>New Entry</Link>
+            <Link className='button' to='/'>History</Link>
+            <Link className='button' to='/'>New Entry</Link>
           </CardBody>
         </Card>
       </div>

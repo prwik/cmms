@@ -13,18 +13,25 @@ import {
 import { Link } from 'react-router-dom';
 
 export default class SiteCard extends Component {
+  iterateObject(object){
+    let list = '';
+    for (let key in object){
+      list += object[key] + ' ';
+    }
+    return list;
+  }
 
   render(){
     return (
       <div>
         <Card>
-          <CardHeader>{this.props.name}</CardHeader>
+          <CardHeader>{ this.props.name }</CardHeader>
           <CardBody>
             <CardTitle className='cardtitle'></CardTitle>
             <CardSubtitle className='cardsubtitle'></CardSubtitle>
-            <CardText>Test Text</CardText>
-            <Link to={'/equip/'+ this.props.id}>Equipment</Link>
-            <Link to='/'>Add/Remove</Link>
+            <CardText>{this.iterateObject(this.props.data.location)}</CardText>
+            <Link className='button' to={ '/equip/'+ this.props.id }>Equipment</Link>
+            <Link className='button' to='/'>Add/Remove</Link>
           </CardBody>
         </Card>
       </div>

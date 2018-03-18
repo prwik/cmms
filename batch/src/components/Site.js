@@ -14,7 +14,7 @@ export default class Equipment extends Component {
 	      .then((responseJson) => {
 	        //console.log(responseJson.results);
 	        this.setState({
-	          sites: responseJson.results.map((name,index)=> (<SiteCard key={index} name={name.email} id={index}/>)),
+	          sites: responseJson.results.map((data,index)=> (<SiteCard key={index} name={data.email} id={index} data={data}/>)),
 	        });
 	    });
 	}
