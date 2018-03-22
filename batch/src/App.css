@@ -5,6 +5,7 @@ body{
   margin: 0;
   font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
 }
+
 /*
 .card{
   border-radius: 5px;
@@ -14,16 +15,18 @@ body{
   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
     0 0 0 1px rgba(0,0,0,0.04);
   padding: 7px;
+  padding-bottom: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1.5fr 1fr 0.5fr 1fr;
+  grid-template-rows: 1.5fr 1fr 0.5fr 0.5fr;
   grid-column-gap: 3px;
   grid-template-areas:
   "header header"
   "content content"
   ". ."
-  "history new"
+  "footer footer"
 }
+
 */
 .card{
   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
@@ -38,6 +41,7 @@ body{
   ". ."
   "history new"
 }
+
 
 .card_title{
   font-size: 1.3em;
@@ -60,6 +64,7 @@ body{
   padding-bottom: 3px;
 }
 /*
+
 .navbar{
   height: 50px;
   width: 100%;
