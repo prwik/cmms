@@ -1,16 +1,6 @@
 import React, { Component } from 'react';
-import {
-  Card,
-  //CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardHeader,
-  CardSubtitle,
-  //CardLink,
-  //Button 
-} from 'reactstrap';
 import { Link } from 'react-router-dom';
+import  { Card, CardTitle, CardContent, CardButton } from './Card';
 
 export default class SiteCard extends Component {
   iterateObject(object){
@@ -25,14 +15,15 @@ export default class SiteCard extends Component {
     return (
       <div>
         <Card>
-          <CardHeader>{ this.props.name }</CardHeader>
-          <CardBody>
-            <CardTitle className='cardtitle'></CardTitle>
-            <CardSubtitle className='cardsubtitle'></CardSubtitle>
-            <CardText>{this.iterateObject(this.props.data.location)}</CardText>
-            <Link className='button' to={ '/equip/'+ this.props.id }>Equipment</Link>
-            <Link className='button' to='/'>Add/Remove</Link>
-          </CardBody>
+          <CardTitle text={this.props.data.name.first}></CardTitle>
+          <CardContent text={this.iterateObject(this.props.data.location)} >
+          </CardContent>
+          <Link to={ '/equip/'+ this.props.id }>
+              <div className='card_button'>Equipment</div>
+          </Link>
+          <Link to='/'>
+              <div className='card_button'>Add/Remove</div>
+          </Link>
         </Card>
       </div>
     );

@@ -6,7 +6,7 @@ body{
   font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
 }
 
-/*
+
 .card{
   border-radius: 5px;
   background-color: #ffff;
@@ -27,8 +27,8 @@ body{
   "footer footer"
 }
 
-*/
-.card{
+
+/* .card{
   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
     0 0 0 1px rgba(0,0,0,0.04);
   margin: 5px;
@@ -39,8 +39,8 @@ body{
   "header header"
   "content content"
   ". ."
-  "history new"
-}
+  "button button"
+} */
 
 
 .card_title{
@@ -55,14 +55,20 @@ body{
   grid-area: content;
 }
 
-.cardtitle{
-  padding-top: 20px;
+.card_button{
+  margin: 5px;
+  border-radius: 3px;
+  text-align: center;
+  padding-top: 6px;
+  grid-area: footer;
 }
 
 .cardsubtitle{
   padding-top: 0px;
   padding-bottom: 3px;
 }
+
+
 /*
 
 .navbar{
@@ -119,6 +125,7 @@ body{
   text-align: center;
   padding-top: 6px;
 }
+
 
 .button{
   margin: 5px;

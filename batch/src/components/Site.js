@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SiteCard from './SiteCard';
 
-export default class Equipment extends Component {
+export default class Site  extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
