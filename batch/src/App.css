@@ -8,13 +8,13 @@ body{
 
 
 .card{
-  border-radius: 5px;
+  border-radius: 3px;
   background-color: #ffff;
-  min-height: 100px;
+  /*min-height: 45px;*/
   margin: 10px;
   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
     0 0 0 1px rgba(0,0,0,0.04);
-  padding: 7px;
+  padding: 0px;
   padding-bottom: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -23,33 +23,25 @@ body{
   grid-template-areas:
   "header header"
   "content content"
+  "content content"
+  "content content"
   ". ."
   "footer footer"
 }
-
-
-/* .card{
-  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
-    0 0 0 1px rgba(0,0,0,0.04);
-  margin: 5px;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1.5fr 1fr 0.5fr 1fr;
-  grid-column-gap: 3px;
-  grid-template-areas:
-  "header header"
-  "content content"
-  ". ."
-  "button button"
-} */
-
 
 .card_title{
   font-size: 1.3em;
   margin-bottom: 4px;
   grid-area: header;
+  padding: 7px;
+  margin: 0px;
+  height: 45px;
+  background: #F0F0F0;
 }
 
 .card_content{
+  padding-left: 10px;
+  padding-top: 5px;
   font-size: 0.8em;
   color: #757575;
   grid-area: content;
