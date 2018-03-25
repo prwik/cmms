@@ -12,8 +12,7 @@ body{
   background-color: #ffff;
   min-height: 100px;
   margin: 10px;
-  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
-    0 0 0 1px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 3px 0 rgba(0,0,0,0.16);
   padding: 7px;
   padding-bottom: 0;
   display: grid;
@@ -24,7 +23,7 @@ body{
   "header header"
   "content content"
   ". ."
-  "footer footer"
+  "footer ."
 }
 
 
