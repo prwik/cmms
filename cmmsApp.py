@@ -37,7 +37,7 @@ def test_equipment():
 @app.route("/test_sites")
 def test_sites():
     sql = "select name, street, city, state, zip from test.sites"
-    res = engine.exectue(sql).fetchall()
+    res = engine.execute(sql).fetchall()
     response = []
     for row in res:
         response.append({'name': row[0], 'street': row[1], 'city': row[2], 'state': row[3], 'zip': row[4]})
