@@ -28,7 +28,8 @@ class CardContent extends Component {
   render(){
     return (
       <div className='card_content'>
-          {this.props.text}
+          {this.props.street} <br/>
+          {this.props.city}, {this.props.addressState}
           {this.props.children}
       </div>
     );

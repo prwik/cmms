@@ -9,12 +9,14 @@ export default class Site  extends Component {
 		}
 	}
 	componentDidMount(){
-	    fetch('https://randomuser.me/api?results=10')
+	    fetch('http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/test_sites')
 	      .then((results) => results.json())
 	      .then((responseJson) => {
-	        //console.log(responseJson.results);
+	        console.log(responseJson);
 	        this.setState({
-	          sites: responseJson.results.map((data,index)=> (<SiteCard key={index} name={data.email} id={index} data={data}/>)),
+	          sites: responseJson.map((data,index)=> (
+				  <SiteCard key={index} name={data.name} id={index} data={data}/>
+			  )),
 	        });
 	    });
 	}
