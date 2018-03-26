@@ -16,7 +16,7 @@ export default class Equipment extends Component {
 	    super();
 	    this.state = {
 	      cards: null,
-	      api: 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/test?id='
+	      api: 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/test_equipment?id='
 	    };
 	}
 

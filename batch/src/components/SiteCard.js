@@ -15,8 +15,11 @@ export default class SiteCard extends Component {
     return (
       <div>
         <Card>
-          <CardTitle text={this.props.data.name.first}></CardTitle>
-          <CardContent text={this.iterateObject(this.props.data.location)} >
+          <CardTitle text={this.props.data.name}></CardTitle>
+          <CardContent text={this.props.data.street}>
+            <CardContent text={this.props.data.city} />
+            <CardContent text={this.props.data.state} />
+            <CardContent text={this.props.data.zip} />
           </CardContent>
           <Link to={ '/equip/'+ this.props.id }>
               <div className='card_button'>Equipment</div>
