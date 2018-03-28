@@ -28,8 +28,7 @@ class CardContent extends Component {
   render(){
     return (
       <div className='card_content'>
-          {this.props.street} <br/>
-          {this.props.city}, {this.props.addressState}
+          {this.props.text}
           {this.props.children}
       </div>
     );
@@ -48,4 +47,4 @@ class CardButton extends Component {
 }
 
 
-export {Card, CardTitle, CardContent, CardButton }
+export { Card, CardTitle, CardContent, CardButton }
