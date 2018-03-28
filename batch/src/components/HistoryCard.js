@@ -15,7 +15,7 @@ export default class HistoryCard extends Component {
   renderItem(item, index){
     for (var key in item){
       if (item.hasOwnProperty(key)) {
-        console.log(key, item[key]);
+        // console.log(key, item[key]);
       }
     }
 

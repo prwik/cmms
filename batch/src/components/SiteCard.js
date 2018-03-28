@@ -24,7 +24,7 @@ export default class SiteCard extends Component {
           <Link to={ '/equip/'+ this.props.id }>
               <div className='card_button'>Equipment</div>
           </Link>
-          <Link to='/'>
+          <Link to='/addSite/'>
               <div className='card_button'>Add/Remove</div>
           </Link>
         </Card>
