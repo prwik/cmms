@@ -16,10 +16,10 @@ export default class SiteCard extends Component {
       <div>
         <Card>
           <CardTitle text={this.props.data.name}></CardTitle>
-          <CardContent text={this.props.data.street}>
-            <CardContent text={this.props.data.city} />
-            <CardContent text={this.props.data.state} />
-            <CardContent text={this.props.data.zip} />
+          <CardContent text={'Site ID:'}>
+            <p> {this.props.data.street} <br/>
+            {this.props.data.city + ', ' + this.props.data.state + ' ' + this.props.data.zip}
+            </p>
           </CardContent>
           <Link to={ '/equip/'+ this.props.id }>
               <div className='card_button'>Equipment</div>
