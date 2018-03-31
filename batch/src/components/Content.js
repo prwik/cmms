@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Site from './Site';
 import Equipment from './Equipment';
-import { Route, Switch, Router } from 'react-router-dom';
+//import { Route, Switch, Router } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import LoginCard from './LoginCard';
 import Callback from './Callback';
 import SettingsCard from './SettingsCard';
-import history from '../history';
+//import history from '../history';
 
 export default class Content extends Component {
   handleAuthentication(nextState, replace){
@@ -18,27 +19,22 @@ export default class Content extends Component {
     console.log(this.props.auth.isAuthenticated());
     return !this.props.auth.isAuthenticated() ? (
       <div>
-        <Router history={history}>
-          <div>
-            <Route path="/callback" render={(props) => {
-              this.handleAuthentication(props);
-              return <Callback {...props}/>
-            }} />
-            <Route path='/' component={LoginCard} />
-          </div>
-        </Router>
+        <Route exact path='/' component={LoginCard} />
+        <Route path="/callback" render={(props) => {
+          this.handleAuthentication(props);
+          return <Callback {...this.props}/>
+        }} />
       </div>
     )
     :
     (
       <div>
-        <Router history={history}>
-          <div>
-            <Route exact path='/' component={Site} />
-            <Route path='/equip/:id' component={Equipment} />
-            <Route settings='/settings' component={SettingsCard} />
-          </div>
-        </Router>
+        <Route exact path='/' component={Site} />
+        <Route path='/equip/:id' component={Equipment} />
+        <Route path='/settings' component={SettingsCard} />
+        <Route path='/callback' render={() => {
+          return <Callback {...this.props} />
+        }} />
       </div>
     )
   }

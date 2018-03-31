@@ -54,24 +54,25 @@ export default class Navigation extends Component {
                 <NavLink href="/settings">Settings</NavLink>
               </NavItem>
               {
-                !isAuthenticated() && (
-              <NavItem>
-                <NavLink
-                  href="#"
-                  onClick={this.login.bind(this)}
-                  >Login</NavLink>
-              </NavItem>
-                  )
-              }
-              {
-                isAuthenticated() && (
-              <NavItem>
-                <NavLink 
-                  href="/"
-                  onClick={this.logout.bind(this)}
-                  >Logout</NavLink>
-              </NavItem>
-                  )
+                !isAuthenticated() ? (
+                  <NavItem>
+                    <NavLink
+                      href="#"
+                      onClick={this.login.bind(this)}
+                      >Login
+                    </NavLink>
+                  </NavItem>
+                )
+                :
+                (
+                  <NavItem>
+                    <NavLink 
+                      href="/"
+                      onClick={this.logout.bind(this)}
+                      >Logout
+                    </NavLink>
+                  </NavItem>
+                )
               }
             </Nav>
           </Collapse>
@@ -79,6 +80,5 @@ export default class Navigation extends Component {
         </Navbar>
       </div>
     );
-
   }
 }
