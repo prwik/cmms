@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import  { Card, CardTitle, CardContent, CardButton } from './Card';
+import { Card, CardTitle, CardContent, CardButton } from './Card';
 
 export default class SiteCard extends Component {
   iterateObject(object){
