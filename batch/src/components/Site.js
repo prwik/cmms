@@ -6,13 +6,14 @@ export default class Site extends Component {
 		super(props);
 		this.state = {
 			sites: null,
-		}
+		};
+		this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/test_sites';
 	}
 	componentDidMount(){
-	    fetch('http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/test_sites')
+	    fetch(this.api)
 	      .then((results) => results.json())
 	      .then((responseJson) => {
-	        console.log(responseJson);
+	        //console.log(responseJson);
 	        this.setState({
 	          sites: responseJson.map((data,index)=> (
 				  <SiteCard key={index} name={data.name} id={index} data={data}/>
@@ -24,7 +25,7 @@ export default class Site extends Component {
 	render(){
 		return (
 			<div>
-			{this.state.sites}
+				{this.state.sites}
 			</div>
 		);
 	}
