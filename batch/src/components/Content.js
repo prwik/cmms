@@ -16,18 +16,6 @@ export default class Content extends Component {
   }
 
   render() {
-<<<<<<< HEAD
-  	return (
-  	<div>
-  		<Switch>
-  			<Route exact path='/' component={Site} />
-            <Route path='/login/' component={Auth} />
-  			<Route path='/equip/:id' component={Equipment} />
-            <Route path='/addSite/' component={SiteForm} />
-  		</Switch>
-  	</div>
-  	);
-=======
     console.log(this.props.auth.isAuthenticated());
     return !this.props.auth.isAuthenticated() ? (
       <div>
@@ -49,6 +37,5 @@ export default class Content extends Component {
         }} />
       </div>
     )
->>>>>>> eb0196bd11f029ec889b8eb4fb20962ef093407a
   }
 }
