@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardTitle, CardContent, CardButton } from './Card';
+import { Card, CardTitle, CardContent } from './Card';
 import { Link } from 'react-router-dom';
 
 export default class EquipmentCard extends Component {

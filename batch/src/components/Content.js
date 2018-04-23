@@ -4,6 +4,8 @@ import Equipment from './Equipment';
 import { Route, Switch } from 'react-router-dom';
 import LoginCard from './LoginCard';
 import Form from './Form';
+import Callback from './Callback';
+import SettingsCard from './SettingsCard';
 
 export default class Content extends Component {
   handleAuthentication(nextState, replace){
@@ -18,7 +20,13 @@ export default class Content extends Component {
   		<Switch>
         {
           !this.props.auth.isAuthenticated() && (
-              <Route exact path='/' component={LoginCard} />
+            <div>
+              <Route path='/' component={LoginCard} />
+              <Route path="/callback" render={(props) => {
+                this.handleAuthentication(props);
+                return <Callback {...this.props}/>
+              }} />
+            </div>
           )
         }
         {
@@ -27,15 +35,12 @@ export default class Content extends Component {
               <Route exact path='/' component={Site} />
               <Route path='/equip/:id' component={Equipment} />
               <Route path='/form' component={Form} />
+              <Route path='/settings' component={SettingsCard} />
             </div>
           )
         }
-        <Route path="/callback" render={(props) => {
-          this.handleAuthentication(props);
-          return <Site/> 
-        }}/>
-  		</Switch>
-  	</div>
-  	);
+      </Switch>
+    </div>
+    )
   }
 }
