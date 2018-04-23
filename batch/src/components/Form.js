@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { Card, CardTitle, CardContent } from './Card';
 
-export default class Form extends React.Component {
+export default class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: '',
-                  value1: '',
-                  value2: '',
-
-    };
+    this.state = {value: ''};
     this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/test_sites';
     this.endpoint = 'endpoint'
     this.formStructure = props.formStructure;
@@ -44,12 +40,12 @@ export default class Form extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <label>
               Name:
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
+              <input type="text" value={this.state.value[0]} onChange={this.handleChange} />
             </label>
             <br />
-            <FormShortText title='text input ' value={this.state.value1} handleChange={this.handleChange} />
+            <FormShortText title='text input ' value={this.state.value[1]} handleChange={this.handleChange} />
             <br />
-            <FormLongText title='text box ' value={this.state.value2} handleChange={this.handleChange} />
+            <FormLongText title='text box ' value={this.state.value[2]} handleChange={this.handleChange} />
             <br/>
             <FormSelect title='select' value={['A', 'B', 'C']} />
             <br />
