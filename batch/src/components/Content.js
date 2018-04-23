@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Site from './Site';
 import Equipment from './Equipment';
 import { Route, Switch } from 'react-router-dom';
-import LoginCard from './LoginCard'
+import LoginCard from './LoginCard';
+import Form from './Form';
 
 export default class Content extends Component {
   handleAuthentication(nextState, replace){
@@ -25,6 +26,7 @@ export default class Content extends Component {
             <div>
               <Route exact path='/' component={Site} />
               <Route path='/equip/:id' component={Equipment} />
+              <Route path='/form' component={Form} />
             </div>
           )
         }

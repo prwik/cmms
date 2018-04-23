@@ -11,7 +11,6 @@ class Card extends Component {
   }
 }
 
-
 class CardTitle extends Component {
 
   render(){
