@@ -129,3 +129,8 @@ body{
 .image{
   width: 318px;
 }
+
+.form_element{
+
+  grid-area: content;
+}

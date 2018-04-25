@@ -24,7 +24,7 @@ export default class Content extends Component {
               <Route path='/' component={LoginCard} />
               <Route path="/callback" render={(props) => {
                 this.handleAuthentication(props);
-                return <Callback {...this.props}/>
+                return <Callback {...this.props} />
               }} />
             </div>
           )
@@ -34,7 +34,9 @@ export default class Content extends Component {
             <div>
               <Route exact path='/' component={Site} />
               <Route path='/equip/:id' component={Equipment} />
-              <Route path='/form' component={Form} />
+              <Route path='/form' render={() => {
+                return <Form formStructure={{'3mo_checkup': {value: '', type: 'FormShortText'}, '6mo_checkup': {value: '', type: 'FormShortText'}, '12mo_checkup': {value: '', type: 'FormShortText'}}} />
+              }} />
               <Route path='/settings' component={SettingsCard} />
             </div>
           )

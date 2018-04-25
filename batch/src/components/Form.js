@@ -4,17 +4,31 @@ import { Card, CardTitle, CardContent } from './Card';
 export default class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
-    this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/test_sites';
+    this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/';
     this.endpoint = 'endpoint'
-    this.formStructure = props.formStructure;
+    this.state = props.formStructure;
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    //fix this so it's not mutating the state object. (create copy of state, create sub-object, merge both and set new state). TODO.
+    const formObject = {
+      value: value,
+      type: this.state[name].type
+    }
+
+    let state = this.state;
+    state[name] = formObject;
+
+    this.setState(
+      state
+    );
   }
 
   handleSubmit(event) {
@@ -32,23 +46,31 @@ export default class Form extends Component {
     console.log(JSON.stringify(this.state.value));
   }
 
+  buildFormStructure() {
+    let inputs=[];
+    let TagName;
+    for (let key in this.state) {
+      if (this.state[key].type === 'FormShortText') {
+        TagName = FormShortText;
+      }
+      else if (this.state[key].type === 'FormLongText') {
+        TagName = FormLongText;
+      }
+      else {
+        TagName = FormShortText;
+      }
+      inputs.push(<div key={key} className='form_element'><TagName title={key} value={this.state[key].value} handleChange={this.handleChange} /></div>)
+    }
+    return inputs;
+  }
+
   render() {
     return (
       <Card>
         <CardTitle text="Input Form" />
         <CardContent>
           <form onSubmit={this.handleSubmit}>
-            <label>
-              Name:
-              <input type="text" value={this.state.value[0]} onChange={this.handleChange} />
-            </label>
-            <br />
-            <FormShortText title='text input ' value={this.state.value[1]} handleChange={this.handleChange} />
-            <br />
-            <FormLongText title='text box ' value={this.state.value[2]} handleChange={this.handleChange} />
-            <br/>
-            <FormSelect title='select' value={['A', 'B', 'C']} />
-            <br />
+            {this.buildFormStructure()}
             <input type="submit" value="Submit" />
           </form>
         </CardContent>
@@ -61,7 +83,7 @@ function FormShortText(props) {
   return (
     <label>
       {props.title}
-      <input type="text" value={props.value} onChange={props.handleChange} />
+      <input type="text" name={props.title} value={props.value} onChange={props.handleChange} />
     </label>
   );
 }
@@ -70,7 +92,7 @@ function FormLongText(props) {
   return (
     <label>
       {props.title}
-      <textarea value={props.value} onChange={props.handleChange} />
+      <textarea name={props.title} value={props.value} onChange={props.handleChange} />
     </label>
   );
 }
