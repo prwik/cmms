@@ -17,7 +17,6 @@ export default class Form extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    //fix this so it's not mutating the state object. (create copy of state, create sub-object, merge both and set new state). TODO.
     const formObject = {
       value: value,
       type: this.state[name].type
@@ -26,13 +25,11 @@ export default class Form extends Component {
     let state = this.state;
     state[name] = formObject;
 
-    this.setState(
-      state
-    );
+    this.setState(state);
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+    alert('A name was submitted: ' + JSON.stringify(this.state.value));
     event.preventDefault();
 
     fetch(this.api + this.endpoint, {
@@ -56,10 +53,13 @@ export default class Form extends Component {
       else if (this.state[key].type === 'FormLongText') {
         TagName = FormLongText;
       }
+      else if (this.state[key].type === 'FormCheckBox') {
+        TagName = FormCheckBox;
+      }
       else {
         TagName = FormShortText;
       }
-      inputs.push(<div key={key} className='form_element'><TagName title={key} value={this.state[key].value} handleChange={this.handleChange} /></div>)
+      inputs.push(<CardContent key={key}><TagName title={key} value={this.state[key].value} handleChange={this.handleChange} /></CardContent>)
     }
     return inputs;
   }
@@ -68,12 +68,10 @@ export default class Form extends Component {
     return (
       <Card>
         <CardTitle text="Input Form" />
-        <CardContent>
           <form onSubmit={this.handleSubmit}>
             {this.buildFormStructure()}
             <input type="submit" value="Submit" />
           </form>
-        </CardContent>
       </Card>
     );
   }
@@ -97,11 +95,11 @@ function FormLongText(props) {
   );
 }
 
-function FormSelect(props) {
+function FormCheckBox(props) {
   return (
     <label>
     {props.title}
-    <select multiple={true} value={props.value}/>
+    <input type="checkbox" name={props.title} value={props.value} onChange={props.handleChange} />
     </label>
   );
 }

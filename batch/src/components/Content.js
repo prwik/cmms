@@ -35,7 +35,7 @@ export default class Content extends Component {
               <Route exact path='/' component={Site} />
               <Route path='/equip/:id' component={Equipment} />
               <Route path='/form' render={() => {
-                return <Form formStructure={{'3mo_checkup': {value: '', type: 'FormShortText'}, '6mo_checkup': {value: '', type: 'FormShortText'}, '12mo_checkup': {value: '', type: 'FormShortText'}}} />
+                return <Form formStructure={{'3mo_checkup': {value: '', type: 'FormCheckBox'}, '6mo_checkup': {value: '', type: 'FormShortText'}, '12mo_checkup': {value: '', type: 'FormShortText'}}} />
               }} />
               <Route path='/settings' component={SettingsCard} />
             </div>
