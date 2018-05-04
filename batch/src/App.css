@@ -15,10 +15,9 @@ body{
   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
     0 0 0 1px rgba(0,0,0,0.04);
   padding: 0px;
-  padding-bottom: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1.5fr 1fr 0.5fr 0.5fr;
+  grid-template-rows: .25fr 1fr 0.5fr 0.5fr;
   grid-column-gap: 3px;
   grid-template-areas:
   "header header"
@@ -35,11 +34,11 @@ body{
   grid-area: header;
   padding: 7px;
   margin: 0px;
-  height: 45px;
   background: #F0F0F0;
 }
 
 .card_content{
+  padding: 10px;
   padding-left: 10px;
   padding-top: 5px;
   font-size: 0.8em;
@@ -48,11 +47,15 @@ body{
 }
 
 .card_button{
-  margin: 5px;
+  padding: 3px;
   border-radius: 3px;
+  width: 75px;
   text-align: center;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
+  0 0 0 1px rgba(0,0,0,0.04);
   padding-top: 6px;
-  grid-area: footer;
+  background: #F0F0F0;
+
 }
 
 .cardsubtitle{
@@ -88,15 +91,6 @@ body{
   display: gird;
 }
 
-.menu_lines{
-  margin: 10px;
-  border-radius: 2px;
-  height: 3px;
-  width: 35px;
-  background-color: #ffff;
-  align-self: center;
-}
-
 .history_button{
   font-size: 0.8em;
   color: #ffff;
@@ -118,7 +112,6 @@ body{
   padding-top: 6px;
 }
 
-
 .button{
   margin: 5px;
   border-radius: 3px;
@@ -130,7 +123,49 @@ body{
   width: 318px;
 }
 
-.form_element{
+/*** Form Style ***/
 
-  grid-area: content;
+.form > * {
+ font: 1.4em 'Unkempt', sans-serif;
+ color: #000000;
 }
+.form {
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
+    0 0 0 1px rgba(0,0,0,0.04);
+  border-radius: 3px;
+  margin: 0px;
+  padding: 0px;
+}
+.form_container {
+  display: grid;
+  grid-template-columns: [labels] .5fr [controls] 1fr;
+  grid-auto-flow: row;
+  grid-gap: .8em .5em;
+  background: #FFFFFF;
+  padding: 1.2em;
+  margin: 0px;
+}
+.form_container > label,
+.form_container > fieldset  {
+  grid-column: labels;
+  grid-row: auto;
+}
+.form_container > input, 
+.form_container > select,
+.form_container > textarea,
+.form_container > button {
+  grid-column: controls;
+  grid-row: auto;
+  padding: .4em;
+  border: 1;
+}
+.form_container > fieldset {
+  grid-column: span 2;
+}  
+.form_container > button {
+  background: darkkhaki;
+  color: white;
+  }
+.form_container > textarea {
+  min-height: 3em;
+  }

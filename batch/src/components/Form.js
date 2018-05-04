@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardTitle, CardContent } from './Card';
+import { Card, CardTitle, CardContent, CardButton } from './Card';
 
 export default class Form extends Component {
   constructor(props) {
@@ -7,6 +7,7 @@ export default class Form extends Component {
     this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/';
     this.endpoint = 'endpoint'
     this.state = props.formStructure;
+    this.title = props.title;
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,14 +23,14 @@ export default class Form extends Component {
       type: this.state[name].type
     }
 
-    let state = this.state;
-    state[name] = formObject;
+    let new_state = this.state;
+    new_state[name] = formObject;
 
-    this.setState(state);
+    this.setState(new_state);
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + JSON.stringify(this.state.value));
+    alert(JSON.stringify(this.state));
     event.preventDefault();
 
     fetch(this.api + this.endpoint, {
@@ -38,9 +39,9 @@ export default class Form extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(this.state.value)
+      body: JSON.stringify(this.state)
     })
-    console.log(JSON.stringify(this.state.value));
+    console.log(JSON.stringify(this.state));
   }
 
   buildFormStructure() {
@@ -59,7 +60,15 @@ export default class Form extends Component {
       else {
         TagName = FormShortText;
       }
-      inputs.push(<CardContent key={key}><TagName title={key} value={this.state[key].value} handleChange={this.handleChange} /></CardContent>)
+      inputs.push(
+        <div key={key}>
+          <TagName
+            title={key}
+            value={this.state[key].value}
+            handleChange={this.handleChange}
+           />
+        </div>
+      );
     }
     return inputs;
   }
@@ -67,11 +76,13 @@ export default class Form extends Component {
   render() {
     return (
       <Card>
-        <CardTitle text="Input Form" />
-          <form onSubmit={this.handleSubmit}>
-            {this.buildFormStructure()}
-            <input type="submit" value="Submit" />
-          </form>
+        <CardTitle text={this.title} />
+          <CardContent>
+            <form className="form" onSubmit={this.handleSubmit}>
+              { this.buildFormStructure() }
+              <div className="form_container"><input type="submit" text="Submit"/></div>
+            </form>
+          </CardContent>
       </Card>
     );
   }
@@ -79,27 +90,33 @@ export default class Form extends Component {
 
 function FormShortText(props) {
   return (
-    <label>
-      {props.title}
-      <input type="text" name={props.title} value={props.value} onChange={props.handleChange} />
-    </label>
+    <div className="form_container">
+      <label htmlFor={props.title}>
+        {props.title}
+      </label>
+      <input type="text" name={props.title} id={props.title} value={props.value} onChange={props.handleChange} />
+    </div>
   );
 }
 
 function FormLongText(props) {
   return (
-    <label>
-      {props.title}
-      <textarea name={props.title} value={props.value} onChange={props.handleChange} />
-    </label>
+    <div className="form_container">
+      <label htmlFor={props.title}>
+        {props.title}
+      </label>
+      <textarea name={props.title} id={props.title} value={props.value} onChange={props.handleChange} />
+    </div>
   );
 }
 
 function FormCheckBox(props) {
   return (
-    <label>
-    {props.title}
-    <input type="checkbox" name={props.title} value={props.value} onChange={props.handleChange} />
-    </label>
+    <div className="form_container">
+      <label htmlFor={props.title}>
+        {props.title}
+      </label>
+      <input type="checkbox" name={props.title} id={props.title} value={props.value} onChange={props.handleChange} />
+    </div>
   );
 }

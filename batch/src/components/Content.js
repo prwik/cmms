@@ -14,6 +14,23 @@ export default class Content extends Component {
     }
   }
 
+  formData = {
+    '3mo Checkup': {
+      value: '',
+      type: 'FormCheckBox'
+    },
+    '6mo Checkup': {
+      value: '',
+      type: 'FormShortText'
+    },
+    '12mo Checkup': {
+      value: '',
+      type: 'FormShortText'
+    }
+  };
+
+  formTitle = 'Form Title';
+
   render() {
   	return (
   	<div>
@@ -34,8 +51,8 @@ export default class Content extends Component {
             <div>
               <Route exact path='/' component={Site} />
               <Route path='/equip/:id' component={Equipment} />
-              <Route path='/form' render={() => {
-                return <Form formStructure={{'3mo_checkup': {value: '', type: 'FormCheckBox'}, '6mo_checkup': {value: '', type: 'FormShortText'}, '12mo_checkup': {value: '', type: 'FormShortText'}}} />
+              <Route path='/form' render={ () => {
+                return <Form title={this.formTitle} formStructure={this.formData} />
               }} />
               <Route path='/settings' component={SettingsCard} />
             </div>

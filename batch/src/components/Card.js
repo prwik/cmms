@@ -38,7 +38,7 @@ class CardButton extends Component {
 
   render(){
     return (
-      <div className='card_button'>
+      <div className='card_button' onClick={this.props.handleClick}>
           {this.props.text}
       </div>
     );
