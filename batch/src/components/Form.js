@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { Card, CardTitle, CardContent, CardButton } from './Card';
+import ErrorBoundary from './ErrorBoundary';
 
 export default class Form extends Component {
   constructor(props) {
     super(props);
     this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/';
     this.endpoint = 'endpoint'
-    this.state = props.formStructure;
     this.title = props.title;
+
+    this.state = {
+      formStructure: props.formStructure,
+      hasError: false
+    }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,17 +25,17 @@ export default class Form extends Component {
 
     const formObject = {
       value: value,
-      type: this.state[name].type
+      type: this.state.formStructure[name].type
     }
 
-    let new_state = this.state;
+    let new_state = this.state.formStructure;
     new_state[name] = formObject;
 
-    this.setState(new_state);
+    this.setState({ formStructure: new_state });
   }
 
   handleSubmit(event) {
-    alert(JSON.stringify(this.state));
+    //alert(JSON.stringify(this.state));
     event.preventDefault();
 
     fetch(this.api + this.endpoint, {
@@ -39,22 +44,22 @@ export default class Form extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(this.state)
-    })
+      body: JSON.stringify(this.state.formStructure)
+    }).catch((error) => { this.setState({ hasError:true })})
     console.log(JSON.stringify(this.state));
   }
 
   buildFormStructure() {
     let inputs=[];
     let TagName;
-    for (let key in this.state) {
-      if (this.state[key].type === 'FormShortText') {
+    for (let key in this.state.formStructure) {
+      if (this.state.formStructure[key].type === 'FormShortText') {
         TagName = FormShortText;
       }
-      else if (this.state[key].type === 'FormLongText') {
+      else if (this.state.formStructure[key].type === 'FormLongText') {
         TagName = FormLongText;
       }
-      else if (this.state[key].type === 'FormCheckBox') {
+      else if (this.state.formStructure[key].type === 'FormCheckBox') {
         TagName = FormCheckBox;
       }
       else {
@@ -64,7 +69,7 @@ export default class Form extends Component {
         <div key={key}>
           <TagName
             title={key}
-            value={this.state[key].value}
+            value={this.state.formStructure[key].value}
             handleChange={this.handleChange}
            />
         </div>
@@ -73,15 +78,25 @@ export default class Form extends Component {
     return inputs;
   }
 
+  componentDidCatch(error, info) {
+    // Display fallback UI
+    this.setState({ hasError: true });
+    //console.log(error);
+    // You can also log the error to an error reporting service
+    //logErrorToMyService(error, info);
+  }
+
   render() {
     return (
       <Card>
         <CardTitle text={this.title} />
           <CardContent>
+            <ErrorBoundary>
             <form className="form" onSubmit={this.handleSubmit}>
               { this.buildFormStructure() }
               <div className="form_container"><input type="submit" text="Submit"/></div>
             </form>
+            </ErrorBoundary>
           </CardContent>
       </Card>
     );
