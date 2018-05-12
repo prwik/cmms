@@ -78,14 +78,6 @@ export default class Form extends Component {
     return inputs;
   }
 
-  componentDidCatch(error, info) {
-    // Display fallback UI
-    this.setState({ hasError: true });
-    //console.log(error);
-    // You can also log the error to an error reporting service
-    //logErrorToMyService(error, info);
-  }
-
   render() {
     return (
       <Card>
