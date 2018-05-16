@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Card, CardTitle, CardContent, CardButton } from './Card';
-import ErrorBoundary from './ErrorBoundary';
 
 export default class Form extends Component {
   constructor(props) {
