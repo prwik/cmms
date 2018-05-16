@@ -6,6 +6,7 @@ import LoginCard from './LoginCard';
 import Form from './Form';
 import Callback from './Callback';
 import SettingsCard from './SettingsCard';
+import { formData, formTitle } from '../Data/FormData';
 
 export default class Content extends Component {
   handleAuthentication(nextState, replace){
@@ -13,39 +14,6 @@ export default class Content extends Component {
       this.props.auth.handleAuthentication();
     }
   }
-
-  formData = {
-    'Service Type': {
-      value: '',
-      type: 'FormShortText'
-    },
-    'Technician': {
-      value: '',
-      type: 'FormShortText'
-    },
-    'Cost': {
-      value: '',
-      type: 'FormShortText'
-    },
-    'Parts List': {
-      value: '',
-      type: 'FormLongText'
-    },
-    '3mo Checkup': {
-      value: '',
-      type: 'FormCheckBox'
-    },
-    '6mo Checkup': {
-      value: '',
-      type: 'FormCheckBox'
-    },
-    '12mo Checkup': {
-      value: '',
-      type: 'FormCheckBox'
-    }
-  };
-
-  formTitle = 'Form Title';
 
   render() {
   	return (
@@ -68,7 +36,7 @@ export default class Content extends Component {
               <Route exact path='/' component={Site} />
               <Route path='/equip/:id' component={Equipment} />
               <Route path='/form' render={ () => {
-                return <Form title={this.formTitle} formStructure={this.formData} />
+                return <Form title={formTitle} formStructure={formData} />
               }} />
               <Route path='/settings' component={SettingsCard} />
             </div>

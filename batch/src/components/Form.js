@@ -35,7 +35,6 @@ export default class Form extends Component {
   }
 
   handleSubmit(event) {
-    //alert(JSON.stringify(this.state));
     event.preventDefault();
 
     fetch(this.api + this.endpoint, {
@@ -78,6 +77,15 @@ export default class Form extends Component {
     return inputs;
   }
 
+  formError() {
+    if(this.state.hasError) {
+      return (
+        <div className="form_container">Submit Error
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <Card>
@@ -86,6 +94,7 @@ export default class Form extends Component {
             <ErrorBoundary>
             <form className="form" onSubmit={this.handleSubmit}>
               { this.buildFormStructure() }
+              { this.formError() }
               <div className="form_container"><input type="submit" text="Submit"/></div>
             </form>
             </ErrorBoundary>
