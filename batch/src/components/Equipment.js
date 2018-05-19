@@ -14,7 +14,6 @@ export default class Equipment extends Component {
 	    fetch(this.api + this.props.match.params.id)
 	      .then((results) => results.json())
 	      .then((responseJson) => {
-	        //console.log(responseJson);
 	        this.setState({
 	        	equipment: responseJson.map((value,key)=>(<EquipmentCard key={key} serial={value.serial_number} manufacturer={value.manufacturer} name={value.name} description={value.description} />))
 	        });

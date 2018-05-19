@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Site from './Site';
 import Equipment from './Equipment';
-//import { Route, Switch, Router } from 'react-router-dom';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import LoginCard from './LoginCard';
+import Form from './Form';
 import Callback from './Callback';
 import SettingsCard from './SettingsCard';
-//import history from '../history';
+import { formData, formTitle } from '../Data/FormData';
 
 export default class Content extends Component {
   handleAuthentication(nextState, replace){
@@ -16,26 +16,34 @@ export default class Content extends Component {
   }
 
   render() {
-    console.log(this.props.auth.isAuthenticated());
-    return !this.props.auth.isAuthenticated() ? (
-      <div>
-        <Route exact path='/' component={LoginCard} />
-        <Route path="/callback" render={(props) => {
-          this.handleAuthentication(props);
-          return <Callback {...this.props}/>
-        }} />
-      </div>
-    )
-    :
-    (
-      <div>
-        <Route exact path='/' component={Site} />
-        <Route path='/equip/:id' component={Equipment} />
-        <Route path='/settings' component={SettingsCard} />
-        <Route path='/callback' render={() => {
-          return <Callback {...this.props} />
-        }} />
-      </div>
+  	return (
+  	<div>
+  		<Switch>
+        {
+          !this.props.auth.isAuthenticated() && (
+            <div>
+              <Route path='/' component={LoginCard} />
+              <Route path="/callback" render={(props) => {
+                this.handleAuthentication(props);
+                return <Callback {...this.props} />
+              }} />
+            </div>
+          )
+        }
+        {
+          this.props.auth.isAuthenticated() && (
+            <div>
+              <Route exact path='/' component={Site} />
+              <Route path='/equip/:id' component={Equipment} />
+              <Route path='/form' render={ () => {
+                return <Form title={formTitle} formStructure={formData} />
+              }} />
+              <Route path='/settings' component={SettingsCard} />
+            </div>
+          )
+        }
+      </Switch>
+    </div>
     )
   }
 }
