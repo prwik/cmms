@@ -90,13 +90,11 @@ export default class Form extends Component {
       <Card>
         <CardTitle text={this.title} />
           <CardContent>
-            <ErrorBoundary>
             <form className="form" onSubmit={this.handleSubmit}>
               { this.buildFormStructure() }
               { this.formError() }
               <div className="form_container"><input type="submit" text="Submit"/></div>
             </form>
-            </ErrorBoundary>
           </CardContent>
       </Card>
     );
