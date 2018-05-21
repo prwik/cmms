@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormShortText, FormLongText, FormCheckBox } from './FormTypes';
 import { Card, CardTitle, CardContent, CardButton } from './Card';
 
 export default class Form extends Component {
@@ -99,37 +100,4 @@ export default class Form extends Component {
       </Card>
     );
   }
-}
-
-function FormShortText(props) {
-  return (
-    <div className="form_container">
-      <label htmlFor={props.title}>
-        {props.title}
-      </label>
-      <input type="text" name={props.title} id={props.title} value={props.value} onChange={props.handleChange} />
-    </div>
-  );
-}
-
-function FormLongText(props) {
-  return (
-    <div className="form_container">
-      <label htmlFor={props.title}>
-        {props.title}
-      </label>
-      <textarea name={props.title} id={props.title} value={props.value} onChange={props.handleChange} />
-    </div>
-  );
-}
-
-function FormCheckBox(props) {
-  return (
-    <div className="form_container">
-      <label htmlFor={props.title}>
-        {props.title}
-      </label>
-      <input type="checkbox" name={props.title} id={props.title} value={props.value} onChange={props.handleChange} />
-    </div>
-  );
 }
