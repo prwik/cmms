@@ -1,32 +1,39 @@
-export const formData = {
-    'Service Type': {
+export const formData = [
+    {
+      name: 'Oil Change',
       value: '',
       type: 'FormShortText'
     },
-    'Technician': {
+    {
+      name: 'Partial Tear Down',
       value: '',
       type: 'FormShortText'
     },
-    'Cost': {
+    {
+      name: 'Rutine',
       value: '',
       type: 'FormShortText'
     },
-    'Parts List': {
+    {
+      name: 'Rutine',
       value: '',
       type: 'FormLongText'
     },
-    '3mo Checkup': {
+    {
+      name: 'Visual Inspection',
       value: '',
       type: 'FormCheckBox'
     },
-    '6mo Checkup': {
+    {
+      name: 'Service Inspection',
       value: '',
       type: 'FormCheckBox'
     },
-    '12mo Checkup': {
+    {
+      name: 'SME Inspection',
       value: '',
       type: 'FormCheckBox'
     }
-};
+];
 
 export const formTitle = 'Form Title';
