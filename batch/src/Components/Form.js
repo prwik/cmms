@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormShortText, FormLongText, FormCheckBox } from './FormTypes';
 import { Card, CardTitle, CardContent, CardButton } from './Card';
 
 export default class Form extends Component {
@@ -17,20 +18,37 @@ export default class Form extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    const target = event.target;
+  handleChange(e, idx) {
+    const target = e.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
     const formObject = {
+      name: name,
       value: value,
-      type: this.state.formStructure[name].type
+      type: this.state.formStructure[idx].type
     }
 
     let new_state = this.state.formStructure;
-    new_state[name] = formObject;
+    new_state[idx] = formObject;
 
     this.setState({ formStructure: new_state });
+  }
+
+  handleRemove(idx) {
+    this.setState({
+      formStructure: this.state.formStructure.filter((s, sidx) => idx !== sidx)
+    });
+  }
+
+  handleAdd() {
+    this.setState({
+      formStructure: this.state.formStructure.concat([{
+        name: 'SME Inspection',
+        value: '',
+        type: 'FormCheckBox'
+      }])
+    });
   }
 
   handleSubmit(event) {
@@ -48,31 +66,32 @@ export default class Form extends Component {
   }
 
   buildFormStructure() {
-    let inputs=[];
+    //let inputs=[];
     let TagName;
-    for (let key in this.state.formStructure) {
-      if (this.state.formStructure[key].type === 'FormShortText') {
+    const inputs = this.state.formStructure.map( (item, idx) => {
+      if (item.type === 'FormShortText') {
         TagName = FormShortText;
       }
-      else if (this.state.formStructure[key].type === 'FormLongText') {
+      else if (item.type === 'FormLongText') {
         TagName = FormLongText;
       }
-      else if (this.state.formStructure[key].type === 'FormCheckBox') {
+      else if (item.type === 'FormCheckBox') {
         TagName = FormCheckBox;
       }
       else {
         TagName = FormShortText;
       }
-      inputs.push(
-        <div key={key}>
+      return (
+        <div key={idx}>
           <TagName
-            title={key}
-            value={this.state.formStructure[key].value}
-            handleChange={this.handleChange}
+            title={item.name}
+            value={item.value}
+            handleChange={(e) => {this.handleChange(e, idx)}}
            />
+          <a onClick={() => {this.handleRemove(idx)}}>remove</a>
         </div>
       );
-    }
+    });
     return inputs;
   }
 
@@ -90,48 +109,14 @@ export default class Form extends Component {
       <Card>
         <CardTitle text={this.title} />
           <CardContent>
-            <ErrorBoundary>
             <form className="form" onSubmit={this.handleSubmit}>
               { this.buildFormStructure() }
+              <a onClick={() => {this.handleAdd()}}>add</a>
               { this.formError() }
               <div className="form_container"><input type="submit" text="Submit"/></div>
             </form>
-            </ErrorBoundary>
           </CardContent>
       </Card>
     );
   }
-}
-
-function FormShortText(props) {
-  return (
-    <div className="form_container">
-      <label htmlFor={props.title}>
-        {props.title}
-      </label>
-      <input type="text" name={props.title} id={props.title} value={props.value} onChange={props.handleChange} />
-    </div>
-  );
-}
-
-function FormLongText(props) {
-  return (
-    <div className="form_container">
-      <label htmlFor={props.title}>
-        {props.title}
-      </label>
-      <textarea name={props.title} id={props.title} value={props.value} onChange={props.handleChange} />
-    </div>
-  );
-}
-
-function FormCheckBox(props) {
-  return (
-    <div className="form_container">
-      <label htmlFor={props.title}>
-        {props.title}
-      </label>
-      <input type="checkbox" name={props.title} id={props.title} value={props.value} onChange={props.handleChange} />
-    </div>
-  );
 }
