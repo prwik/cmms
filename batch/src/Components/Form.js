@@ -51,8 +51,8 @@ export default class Form extends Component {
     });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit(e) {
+    e.preventDefault();
 
     fetch(this.api + this.endpoint, {
       method: 'POST',
