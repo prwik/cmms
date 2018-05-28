@@ -17,7 +17,7 @@ export default class EquipmentCard extends Component {
             <div className="card_button">History</div>
           </Link>
           <Link to='/'>
-            <div className="card_button">New Entry</div>
+            <div className="card_button">New</div>
           </Link>
         </Card>
       </div>

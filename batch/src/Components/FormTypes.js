@@ -33,4 +33,23 @@ function FormCheckBox(props) {
   );
 }
 
-export { FormShortText, FormLongText, FormCheckBox }
+function FormDropDown(props) {
+  const optionArray = props.optionArray.map((a,idx) => {
+    return <option value={a}>{a}</option>
+  });
+  return (
+    <div className="form_container">
+      <label htmlFor={props.title}>
+        {props.title}
+      </label>
+      <select 
+        value={props.value} 
+        onChange={props.handleChange} 
+      >
+      {optionArray}
+      </select>
+    </div>
+  );
+}
+
+export { FormShortText, FormLongText, FormCheckBox, FormDropDown }

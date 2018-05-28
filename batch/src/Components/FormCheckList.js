@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { FormShortText, FormLongText, FormCheckBox } from './FormTypes';
+import { FormShortText, FormCheckBox, FormDropDown } from './FormTypes';
 import { Card, CardTitle, CardContent, CardButton } from './Card';
 
-export default class Form extends Component {
+export default class CheckList extends Component {
   constructor(props) {
     super(props);
     this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/';
     this.endpoint = 'endpoint'
     this.title = props.title;
     this.equipID = props.equipID;
+    this.inputTypes = ['FormShortText', 'FormLongText', 'FormCheckBox'];
 
     this.state = {
       equipID: this.equipID,
@@ -46,8 +47,8 @@ export default class Form extends Component {
   handleAdd() {
     this.setState({
       formStructure: this.state.formStructure.concat([{
-        name: 'SME Inspection',
-        value: '',
+        name: 'New Item',
+        value: 'new_item',
         type: 'FormCheckBox'
       }])
     });
@@ -63,32 +64,26 @@ export default class Form extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(this.state)
-    }).catch((error) => { this.setState({ hasError:true })})
+    }).catch((error) => { this.setState({ hasError: true })})
     console.log(JSON.stringify(this.state));
   }
 
   buildFormStructure() {
     let TagName;
-    const inputs = this.state.formStructure.map( (item, idx) => {
-      if (item.type === 'FormShortText') {
-        TagName = FormShortText;
-      }
-      else if (item.type === 'FormLongText') {
-        TagName = FormLongText;
-      }
-      else if (item.type === 'FormCheckBox') {
-        TagName = FormCheckBox;
-      }
-      else {
-        TagName = FormShortText;
-      }
+    const inputs = this.state.formStructure.map((item, idx) => {
       return (
         <div key={idx}>
-          <TagName
-            title={item.name}
-            value={item.value}
+          <FormShortText
+            title='Input Name'
+            value={item.name}
             handleChange={(e) => {this.handleChange(e, idx)}}
-           />
+          />
+          <FormDropDown
+            title={'Input Type'}
+            value={item.type}
+            optionArray={this.inputTypes}
+            handleChange={(e) => {this.handleChange(e, idx)}}
+          />
           <a onClick={() => {this.handleRemove(idx)}}>remove</a>
         </div>
       );
