@@ -17,22 +17,42 @@ export default class CheckList extends Component {
       hasError: false
     }
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleValueChange = this.handleValueChange.bind(this);
+    this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e, idx) {
+  handleValueChange(e, idx) {
     const target = e.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
+    let new_state = this.state.formStructure;
+
     const formObject = {
-      name: name,
-      value: value,
+      name: value,
+      value: this.state.formStructure[idx].value,
       type: this.state.formStructure[idx].type
     }
 
+    new_state[idx] = formObject;
+
+    this.setState({ formStructure: new_state });
+  }
+
+  handleTypeChange(e, idx) {
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
     let new_state = this.state.formStructure;
+
+    const formObject = {
+      name: this.state.formStructure[idx].name,
+      value: this.state.formStructure[idx].value,
+      type: value
+    }
+
     new_state[idx] = formObject;
 
     this.setState({ formStructure: new_state });
@@ -69,20 +89,19 @@ export default class CheckList extends Component {
   }
 
   buildFormStructure() {
-    let TagName;
     const inputs = this.state.formStructure.map((item, idx) => {
       return (
         <div key={idx}>
           <FormShortText
             title='Input Name'
             value={item.name}
-            handleChange={(e) => {this.handleChange(e, idx)}}
+            handleChange={(e) => {this.handleValueChange(e, idx)}}
           />
           <FormDropDown
             title={'Input Type'}
             value={item.type}
             optionArray={this.inputTypes}
-            handleChange={(e) => {this.handleChange(e, idx)}}
+            handleChange={(e) => {this.handleTypeChange(e, idx)}}
           />
           <a onClick={() => {this.handleRemove(idx)}}>remove</a>
         </div>
