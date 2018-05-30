@@ -8,18 +8,20 @@ export default class CheckList extends Component {
     this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/';
     this.endpoint = 'endpoint'
     this.title = props.title;
-    this.equipID = props.equipID;
+    this.equipId = props.equipId;
     this.inputTypes = ['FormShortText', 'FormLongText', 'FormCheckBox'];
 
     this.state = {
       equipID: this.equipID,
       formStructure: props.formStructure,
+      isEditable: false,
       hasError: false
     }
 
     this.handleValueChange = this.handleValueChange.bind(this);
     this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEditable = this.handleEditable.bind(this);
   }
 
   handleValueChange(e, idx) {
@@ -67,9 +69,9 @@ export default class CheckList extends Component {
   handleAdd() {
     this.setState({
       formStructure: this.state.formStructure.concat([{
-        name: 'New Item',
-        value: 'new_item',
-        type: 'FormCheckBox'
+        name: '',
+        value: '',
+        type: 'FormShortText'
       }])
     });
   }
@@ -88,6 +90,12 @@ export default class CheckList extends Component {
     console.log(JSON.stringify(this.state));
   }
 
+  handleEditable() {
+    this.setState({
+      isEditable: !this.state.isEditable
+    })
+  }
+
   buildFormStructure() {
     const inputs = this.state.formStructure.map((item, idx) => {
       return (
@@ -103,7 +111,7 @@ export default class CheckList extends Component {
             optionArray={this.inputTypes}
             handleChange={(e) => {this.handleTypeChange(e, idx)}}
           />
-          <a onClick={() => {this.handleRemove(idx)}}>remove</a>
+          <a className='form_container' onClick={() => {this.handleRemove(idx)}}>Remove Field</a>
         </div>
       );
     });
@@ -120,17 +128,37 @@ export default class CheckList extends Component {
   }
 
   render() {
-    return (
-      <Card>
-        <CardTitle text={this.title} />
+    if (this.state.isEditable) {
+      return (
+        <Card>
+          <CardTitle text={this.title} />
           <CardContent>
             <form className="form" onSubmit={this.handleSubmit}>
               { this.buildFormStructure() }
-              <a onClick={() => {this.handleAdd()}}>add</a>
+              <a className="form_container" onClick={() => {this.handleAdd()}}>Add Field</a>
+              <a className="form_container" onClick={this.handleEditable}>Save</a>
               { this.formError() }
-              <div className="form_container"><input type="submit" text="Submit"/></div>
+              <div className="form_container" className="form_container"><input type="submit" text="Submit"/></div>
             </form>
           </CardContent>
+        </Card>
+      );
+    }
+    return (
+      <Card>
+        <CardTitle text={this.title} />
+        <CardContent>
+        {
+          this.state.formStructure.map((i, idx) => {
+            return (
+              <div key={idx}>
+              <p>{i.name}: {i.type}</p>
+              </div>
+            )
+          })
+        }
+        <a onClick={this.handleEditable}>Edit</a>
+        </CardContent>
       </Card>
     );
   }

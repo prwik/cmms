@@ -1,17 +1,17 @@
 export const formData = [
   {
     name: 'Oil Change',
-    value: '',
+    value: 'done',
     type: 'FormShortText'
   },
   {
     name: 'Partial Tear Down',
-    value: '',
+    value: 'done 7/3',
     type: 'FormShortText'
   },
   {
     name: 'Rutine',
-    value: '',
+    value: 'done 3/4',
     type: 'FormShortText'
   },
   {
@@ -26,7 +26,7 @@ export const formData = [
   },
   {
     name: 'Service Inspection',
-    value: '',
+    value: true,
     type: 'FormCheckBox'
   },
   {

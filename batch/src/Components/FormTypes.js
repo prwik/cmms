@@ -6,7 +6,7 @@ function FormShortText(props) {
       <label htmlFor={props.title}>
         {props.title}
       </label>
-      <input type="text" name={props.title} id={props.title} value={props.value} onChange={props.handleChange} />
+      <input type="text" name={props.title} id={props.title} value={props.value} placeholder={'Enter Value'} onChange={props.handleChange} />
     </div>
   );
 }
