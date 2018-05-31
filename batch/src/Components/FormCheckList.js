@@ -8,11 +8,10 @@ export default class CheckList extends Component {
     this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/';
     this.endpoint = 'endpoint'
     this.title = props.title;
-    this.equipId = props.equipId;
+    this.equipId = this.props.match.params.id;
     this.inputTypes = ['FormShortText', 'FormLongText', 'FormCheckBox'];
 
     this.state = {
-      equipID: this.equipID,
       formStructure: props.formStructure,
       isEditable: false,
       hasError: false
@@ -85,9 +84,15 @@ export default class CheckList extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify({
+        equipId: this.equipId,
+        data: this.state.formStructure
+      })
     }).catch((error) => { this.setState({ hasError: true })})
-    console.log(JSON.stringify(this.state));
+    console.log(JSON.stringify({
+      equipId: this.equipId,
+      content: this.state.formStructure
+    }));
   }
 
   handleEditable() {

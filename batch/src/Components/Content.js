@@ -36,11 +36,11 @@ export default class Content extends Component {
             <div>
               <Route exact path='/' component={Site} />
               <Route path='/equip/:id' component={Equipment} />
-              <Route path='/form/' render={ () => {
-                return <Form title={formTitle} formStructure={formData} />
+              <Route path='/form/:id' render={(props) => {
+                return <Form title={formTitle} formStructure={formData} {...props} />
               }} />
-              <Route path='/checklist/' render={ () => {
-                return <CheckList title={formTitle} formStructure={formData} />
+              <Route path='/checklist/:id' render={(props) => {
+                return <CheckList title={formTitle} formStructure={formData} {...props} />
               }} />
               <Route path='/settings' component={SettingsCard} />
             </div>

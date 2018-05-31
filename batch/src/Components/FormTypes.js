@@ -35,7 +35,7 @@ function FormCheckBox(props) {
 
 function FormDropDown(props) {
   const optionArray = props.optionArray.map((a,idx) => {
-    return <option value={a}>{a}</option>
+    return <option key={idx} value={a}>{a}</option>
   });
   return (
     <div className="form_container">
