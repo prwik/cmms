@@ -16,7 +16,7 @@ export default class EquipmentCard extends Component {
           <Link to='/'>
             <div className="card_button">History</div>
           </Link>
-          <Link to='/'>
+          <Link to={'/checklist/' + this.props.id}>
             <div className="card_button">New</div>
           </Link>
         </Card>
