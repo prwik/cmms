@@ -20,6 +20,8 @@ export default class SiteCard extends Component {
           <CardContent text={'Site ID:'}>
             <p> {this.props.data.street} <br/>
             {this.props.data.city + ', ' + this.props.data.state + ' ' + this.props.data.zip}
+            <br/>
+            hej
             </p>
           </CardContent>
           <Link to={ '/equip/'+ this.props.id }>
