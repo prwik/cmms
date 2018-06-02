@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { FormShortText, FormCheckBox, FormDropDown } from './FormTypes';
+import { FormShortText, FormLongText, FormCheckBox } from './FormTypes';
 import { Card, CardTitle, CardContent, CardButton } from './Card';
 
-export default class CheckList extends Component {
+export default class FormInput extends Component {
   constructor(props) {
     super(props);
     this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/';
     this.endpoint = 'endpoint'
     this.title = props.title;
-    this.equipId = this.props.match.params.id;
-    this.inputTypes = ['FormShortText', 'FormLongText', 'FormCheckBox'];
+    this.equipId = props.match.params.id;
+    this.period = props.period;
 
     this.state = {
       formStructure: props.formStructure,
@@ -17,43 +17,23 @@ export default class CheckList extends Component {
       hasError: false
     }
 
-    this.handleValueChange = this.handleValueChange.bind(this);
-    this.handleTypeChange = this.handleTypeChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEditable = this.handleEditable.bind(this);
   }
 
-  handleValueChange(e, idx) {
+  handleChange(e, idx) {
     const target = e.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    let new_state = this.state.formStructure;
-
     const formObject = {
-      name: value,
-      value: this.state.formStructure[idx].value,
+      name: name,
+      value: value,
       type: this.state.formStructure[idx].type
     }
 
-    new_state[idx] = formObject;
-
-    this.setState({ formStructure: new_state });
-  }
-
-  handleTypeChange(e, idx) {
-    const target = e.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
     let new_state = this.state.formStructure;
-
-    const formObject = {
-      name: this.state.formStructure[idx].name,
-      value: this.state.formStructure[idx].value,
-      type: value
-    }
-
     new_state[idx] = formObject;
 
     this.setState({ formStructure: new_state });
@@ -68,15 +48,21 @@ export default class CheckList extends Component {
   handleAdd() {
     this.setState({
       formStructure: this.state.formStructure.concat([{
-        name: '',
+        name: 'SME Inspection',
         value: '',
-        type: 'FormShortText'
+        type: 'FormCheckBox'
       }])
     });
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    const data = {
+      title: this.title,
+      equipId: this.equipId,
+      period: this.period,
+      content: this.state.formStructure
+    }
 
     fetch(this.api + this.endpoint, {
       method: 'POST',
@@ -84,15 +70,12 @@ export default class CheckList extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        equipId: this.equipId,
-        data: this.state.formStructure
-      })
+      body: JSON.stringify(data)
     }).catch((error) => { this.setState({ hasError: true })})
-    console.log(JSON.stringify({
-      equipId: this.equipId,
-      content: this.state.formStructure
-    }));
+    if(!this.state.hasError){
+      this.handleEditable()
+    }
+    console.log(JSON.stringify(data));
   }
 
   handleEditable() {
@@ -102,21 +85,27 @@ export default class CheckList extends Component {
   }
 
   buildFormStructure() {
-    const inputs = this.state.formStructure.map((item, idx) => {
+    let TagName;
+    const inputs = this.state.formStructure.map( (item, idx) => {
+      if (item.type === 'FormShortText') {
+        TagName = FormShortText;
+      }
+      else if (item.type === 'FormLongText') {
+        TagName = FormLongText;
+      }
+      else if (item.type === 'FormCheckBox') {
+        TagName = FormCheckBox;
+      }
+      else {
+        TagName = FormShortText;
+      }
       return (
         <div key={idx}>
-          <FormShortText
-            title='Input Name'
-            value={item.name}
-            handleChange={(e) => {this.handleValueChange(e, idx)}}
-          />
-          <FormDropDown
-            title={'Input Type'}
-            value={item.type}
-            optionArray={this.inputTypes}
-            handleChange={(e) => {this.handleTypeChange(e, idx)}}
-          />
-          <a className='form_container' onClick={() => {this.handleRemove(idx)}}>Remove Field</a>
+          <TagName
+            title={item.name}
+            value={item.value}
+            handleChange={(e) => {this.handleChange(e, idx)}}
+           />
         </div>
       );
     });
@@ -140,10 +129,8 @@ export default class CheckList extends Component {
           <CardContent>
             <form className="form" onSubmit={this.handleSubmit}>
               { this.buildFormStructure() }
-              <a className="form_container" onClick={() => {this.handleAdd()}}>Add Field</a>
-              <a className="form_container" onClick={this.handleEditable}>Save</a>
               { this.formError() }
-              <div className="form_container" className="form_container"><input type="submit" text="Submit"/></div>
+              <div className="form_container"><input type="submit" text="Submit"/></div>
             </form>
           </CardContent>
         </Card>
@@ -157,7 +144,7 @@ export default class CheckList extends Component {
           this.state.formStructure.map((i, idx) => {
             return (
               <div key={idx}>
-              <p>{i.name}: {i.type}</p>
+              <p>{i.name}: {i.value}</p>
               </div>
             )
           })
