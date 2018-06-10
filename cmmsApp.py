@@ -14,6 +14,11 @@ app = Flask(__name__)
 def hello():
     return "Flask Index Page"
 
+@app.route("/check_lists", methods=['POST'])
+def check_lists():
+    data = request.values
+    print data
+
 @app.route("/equipment")
 def equipment():
     site_id = request.args.get('id')
