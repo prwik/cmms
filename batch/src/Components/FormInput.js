@@ -6,10 +6,11 @@ export default class FormInput extends Component {
   constructor(props) {
     super(props);
     this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/';
-    this.endpoint = 'endpoint'
+    this.endpoint = 'check_lists'
     this.title = props.title;
     this.equipId = props.match.params.id;
     this.period = props.period;
+    this.formType = 'value';
 
     this.state = {
       formStructure: props.formStructure,
@@ -39,29 +40,14 @@ export default class FormInput extends Component {
     this.setState({ formStructure: new_state });
   }
 
-  handleRemove(idx) {
-    this.setState({
-      formStructure: this.state.formStructure.filter((s, sidx) => idx !== sidx)
-    });
-  }
-
-  handleAdd() {
-    this.setState({
-      formStructure: this.state.formStructure.concat([{
-        name: 'SME Inspection',
-        value: '',
-        type: 'FormCheckBox'
-      }])
-    });
-  }
-
   handleSubmit(e) {
     e.preventDefault();
     const data = {
       title: this.title,
       equipId: this.equipId,
       period: this.period,
-      content: this.state.formStructure
+      formType: this.formType,
+      data: this.state.formStructure
     }
 
     fetch(this.api + this.endpoint, {

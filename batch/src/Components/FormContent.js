@@ -6,10 +6,11 @@ export default class FormContent extends Component {
   constructor(props) {
     super(props);
     this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/';
-    this.endpoint = 'endpoint'
+    this.endpoint = 'check_lists'
     this.title = props.title;
     this.equipId = props.match.params.id;
     this.period = props.period;
+    this.formType = 'template';
     this.inputTypes = ['FormShortText', 'FormLongText', 'FormCheckBox'];
 
     this.state = {
@@ -82,7 +83,8 @@ export default class FormContent extends Component {
       title: this.title,
       equipId: this.equipId,
       period: this.period,
-      content: this.state.formStructure
+      formType: this.formType,
+      data: this.state.formStructure
     }
 
     fetch(this.api + this.endpoint, {
