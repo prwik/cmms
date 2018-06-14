@@ -18,6 +18,7 @@ def hello():
 def check_lists():
     data = request.values
     print data
+    return json.dumps({'code': 1})
 
 @app.route("/equipment")
 def equipment():
