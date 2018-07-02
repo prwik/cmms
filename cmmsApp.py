@@ -16,7 +16,7 @@ def hello():
 
 @app.route("/check_lists", methods=['POST'])
 def check_lists():
-    data = request.values
+    data = request.get_json()
     print data
     return jsonify(data)
 
