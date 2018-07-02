@@ -18,7 +18,7 @@ def hello():
 def check_lists():
     data = request.values
     print data
-    return data
+    return "{'test': 1, 'message': 'you did it'}"
 
 @app.route("/equipment")
 def equipment():
