@@ -112,16 +112,15 @@ class Steps extends Component {
   submitData(){
     let url = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/check_lists';
     fetch(url, {
-      method: 'post',
-      body: JSON.stringify(this.props.steps)
+      method: 'POST',
+      body: JSON.stringify(this.props.steps),
+      headers: {
+      'user-agent': 'Mozilla/4.0 MDN Example',
+      'content-type': 'application/json'
+    }
     })
-      .then((response) => {
-        for(var k in response) {
-          console.log(k);
-          console.log(response[k]);
-        }
-      })
-      // .then((data) => console.log(data));
+      .then((response) => response.json())
+      .then((data) => console.log(data));
 
   }
 
