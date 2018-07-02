@@ -15,7 +15,13 @@ export default class Equipment extends Component {
 	      .then((results) => results.json())
 	      .then((responseJson) => {
 	        this.setState({
-	        	equipment: responseJson.map((value,key)=>(<EquipmentCard key={key} serial={value.serial_number} manufacturer={value.manufacturer} name={value.name} description={value.description} />))
+	        	equipment: responseJson.map((value,key)=>(<EquipmentCard
+								key={key}
+								serial={value.serial_number}
+								manufacturer={value.manufacturer}
+								name={value.name}
+								description={value.description}
+							/>))
 	        });
 	    });
 	}

@@ -6,11 +6,15 @@ body{
   font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
 }
 
+.body-content {
+  padding: 7px;
+}
 
 .card{
   border-radius: 3px;
   background-color: #ffff;
   /*min-height: 45px;*/
+  max-width: 1000px;
   margin: 10px;
   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
     0 0 0 1px rgba(0,0,0,0.04);
@@ -46,16 +50,17 @@ body{
   grid-area: content;
 }
 
-.card_button{
+.card_buttons{
   padding: 3px;
-  border-radius: 3px;
-  width: 75px;
+  margin: 6px;
+  width: 110px;
+  border-radius: 4px;
   text-align: center;
-  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
+  box-shadow: 2px 2px 8px 0 rgba(0,0,0,0.16),
   0 0 0 1px rgba(0,0,0,0.04);
   padding-top: 6px;
   background: #F0F0F0;
-
+  grid-area: footer;
 }
 
 .cardsubtitle{
@@ -151,7 +156,7 @@ body{
   grid-column: labels;
   grid-row: auto;
 }
-.form_container > input, 
+.form_container > input,
 .form_container > select,
 .form_container > textarea,
 .form_container > button {
@@ -162,7 +167,7 @@ body{
 }
 .form_container > fieldset {
   grid-column: span 2;
-}  
+}
 .form_container > button {
   background: darkkhaki;
   color: white;

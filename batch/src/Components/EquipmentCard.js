@@ -14,10 +14,10 @@ export default class EquipmentCard extends Component {
             <CardContent text={ this.props.description } />
           </CardContent>
           <Link to='/'>
-            <div className="card_button">History</div>
+            <div className="card_buttons">History</div>
           </Link>
           <Link to='/'>
-            <div className="card_button">New Entry</div>
+            <div className="card_buttons">New Entry</div>
           </Link>
         </Card>
       </div>

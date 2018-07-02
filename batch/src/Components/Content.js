@@ -4,6 +4,7 @@ import Equipment from './Equipment';
 import { Route, Switch } from 'react-router-dom';
 import LoginCard from './LoginCard';
 import Form from './Form';
+import CheckList from './CheckList';
 import Callback from './Callback';
 import SettingsCard from './SettingsCard';
 import { formData, formTitle } from '../Data/FormData';
@@ -17,7 +18,7 @@ export default class Content extends Component {
 
   render() {
   	return (
-  	<div>
+  	<div className="body-content">
   		<Switch>
         {
           !this.props.auth.isAuthenticated() && (
@@ -36,7 +37,7 @@ export default class Content extends Component {
               <Route exact path='/' component={Site} />
               <Route path='/equip/:id' component={Equipment} />
               <Route path='/form' render={ () => {
-                return <Form title={formTitle} formStructure={formData} />
+                return <CheckList title={formTitle} formStructure={formData} />
               }} />
               <Route path='/settings' component={SettingsCard} />
             </div>
