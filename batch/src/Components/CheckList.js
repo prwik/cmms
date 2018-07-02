@@ -115,7 +115,7 @@ class Steps extends Component {
       method: 'post',
       body: JSON.stringify(this.props.steps)
     })
-      .then((response) => console.log(response.json()))
+      .then((response) => console.log(response))
       // .then((data) => console.log(data));
 
   }

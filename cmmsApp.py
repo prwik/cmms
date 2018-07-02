@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from sqlalchemy import create_engine
 from config import con_string
 import json
@@ -18,7 +18,7 @@ def hello():
 def check_lists():
     data = request.values
     print data
-    return "{'test': 1, 'message': 'you did it'}"
+    return jsonify(data)
 
 @app.route("/equipment")
 def equipment():
