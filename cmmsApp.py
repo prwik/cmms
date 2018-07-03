@@ -2,6 +2,8 @@ from flask import Flask, jsonify
 from sqlalchemy import create_engine
 from config import con_string
 import json
+import random
+import datetime as dt
 from flask import request
 
 engine = create_engine(con_string)
@@ -16,8 +18,20 @@ def hello():
 
 @app.route("/check_lists", methods=['POST'])
 def check_lists():
+
     data = request.get_json()
-    print data
+    seconds = int(
+        (dt.datetime.now() - dt.datetime.strptime('1970-01-01', '%Y-%m-%d')).total_seconds()
+        )
+    id = random.randint(1, 1000000) + seconds
+    sql = """INSERT INTO test.check_lists (id, equipment_id, form_data)
+            VALUES ({id}, {eID}, '{blob}')""".format(
+        id=id,
+        eID=data['equipmentId'],
+        blob=json.dumps(data['data'])
+        )
+    engine.execute(sql)
+
     return jsonify(data)
 
 @app.route("/equipment")
