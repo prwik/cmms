@@ -16,7 +16,7 @@ export default class Site extends Component {
 	        //console.log(responseJson);
 	        this.setState({
 	          sites: responseJson.map((data,index)=> (
-				  <SiteCard key={index} name={data.name} id={index} data={data}/>
+				  <SiteCard key={index} name={data.name} id={data.id} data={data}/>
 			  )),
 	        });
 	    });

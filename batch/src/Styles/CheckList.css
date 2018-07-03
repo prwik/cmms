@@ -1,0 +1,49 @@
+.add-btn{
+  color: #ffffff;
+  background-color: #42A5F5;
+  padding: 3px;
+  width: 80px;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-btn{
+  color: #ffffff;
+  background-color: #69F0AE;
+  padding: 3px;
+  width: 80px;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.step-form{
+  margin-bottom: 7px;
+}
+
+.spacer{
+  height: 10px;
+}
+
+td{
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.remove-container{
+  background-color: #ff1744;
+  color: #ffffff;
+  height: 15px;
+  width: 15px;
+  text-align: center;
+  border-radius: 3px;
+  vertical-align: middle;
+  position: relative;
+  top: 2px;
+}
+.remove-inner{
+  color: #ffffff;
+  vertical-align: middle;
+  font-size: .7em;
+}
