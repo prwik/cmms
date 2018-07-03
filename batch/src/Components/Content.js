@@ -36,9 +36,7 @@ export default class Content extends Component {
             <div>
               <Route exact path='/' component={Site} />
               <Route path='/equip/:id' component={Equipment} />
-              <Route path='/form' render={ () => {
-                return <CheckList title={formTitle} formStructure={formData} />
-              }} />
+              <Route path='/form/:id' component={CheckList}/>
               <Route path='/settings' component={SettingsCard} />
             </div>
           )

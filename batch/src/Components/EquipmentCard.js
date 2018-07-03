@@ -13,8 +13,8 @@ export default class EquipmentCard extends Component {
             <CardContent text={ this.props.manufacturer } />
             <CardContent text={ this.props.description } />
           </CardContent>
-          <Link to='/'>
-            <div className="card_buttons">History</div>
+          <Link to={'/form/' + this.props.id}>
+            <div className="card_buttons">Check List</div>
           </Link>
           <Link to='/'>
             <div className="card_buttons">New Entry</div>

@@ -5,6 +5,7 @@ export default class CheckList extends Component {
 	constructor() {
 	    super();
       this.state = {
+				equipmentId: null,
         steps: [],
         currenStep: {
           instruction: '',
@@ -17,6 +18,10 @@ export default class CheckList extends Component {
       this.removeStep = this.removeStep.bind(this);
 	    this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/test_equipment?id=';
 	}
+
+	componentDidMount() {
+    this.setState({ equipmentId: this.props.match.params.id });
+  }
 
   genNewStep(){
     let steps = this.state.steps
@@ -98,7 +103,11 @@ export default class CheckList extends Component {
   			</div>
         <div className="spacer"/>
         <div className="spacer"/>
-        <Steps steps={this.state.steps} remove={this.removeStep}/>
+        <Steps
+					steps={this.state.steps}
+					remove={this.removeStep}
+					equipmentId={this.state.equipmentId}
+				/>
       </div>
 		);
 	}
@@ -113,7 +122,10 @@ class Steps extends Component {
     let url = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/check_lists';
     fetch(url, {
       method: 'POST',
-      body: JSON.stringify(this.props.steps),
+      body: JSON.stringify({
+					equipmentId: this.props.equipmentId,
+					data: this.props.steps
+				}),
       headers: {
       'user-agent': 'Mozilla/4.0 MDN Example',
       'content-type': 'application/json'
@@ -137,7 +149,7 @@ class Steps extends Component {
         ));
 
       if(steps.length > 0 ){
-          var submit = <div className="submit-btn" onClick={this.submitData}>Submit</div>;
+          var submit = <div className="submit-btn" onClick={this.submitData}>Save</div>;
       }
 
         return (

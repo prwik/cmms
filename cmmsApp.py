@@ -33,20 +33,33 @@ def equipment():
 @app.route("/test_equipment")
 def test_equipment():
     site_id = request.args.get('id')
-    sql = "select name, description, serial_number, make from test.equipment where site_id={0}".format(site_id)
+    sql = "select name, description, serial_number, make, id from test.equipment where site_id={0}".format(site_id)
     res = engine.execute(sql).fetchall()
     response = []
     for row in res:
-        response.append({'name': row[0], 'description': row[1], 'serial_number': row[2], 'manufacturer': row[3]})
+        response.append({
+            'name': row[0],
+            'description': row[1],
+            'serial_number': row[2],
+            'manufacturer': row[3],
+            'id': row[4]
+            })
     return json.dumps(response)
 
 @app.route("/test_sites")
 def test_sites():
-    sql = "select name, street, city, state, zip from test.sites"
+    sql = "select name, street, city, state, zip, id from test.sites"
     res = engine.execute(sql).fetchall()
     response = []
     for row in res:
-        response.append({'name': row[0], 'street': row[1], 'city': row[2], 'state': row[3], 'zip': row[4]})
+        response.append({
+            'name': row[0],
+            'street': row[1],
+            'city': row[2],
+            'state': row[3],
+            'zip': row[4],
+            'id': row[5]
+            })
     return json.dumps(response)
 
 if __name__ == "__main__":

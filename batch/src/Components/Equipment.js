@@ -7,7 +7,8 @@ export default class Equipment extends Component {
 	    this.state = {
 	      equipment: null
 	    };
-	    this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/test_equipment?id=';
+	    // this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/test_equipment?id=';
+			this.api = 'http://127.0.0.1:5000/test_equipment?id=';
 	}
 
 	componentDidMount(){
@@ -21,6 +22,7 @@ export default class Equipment extends Component {
 								manufacturer={value.manufacturer}
 								name={value.name}
 								description={value.description}
+								id={value.id}
 							/>))
 	        });
 	    });
