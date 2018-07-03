@@ -16,6 +16,8 @@ export default class EquipmentCard extends Component {
           <Link to={'/form/' + this.props.id}>
             <div className="card_buttons">Check List</div>
           </Link>
+          <Link to={'/FormContent/' + this.props.id}>
+            <div className="card_button">New</div>
           <Link to='/'>
             <div className="card_buttons">New Entry</div>
           </Link>

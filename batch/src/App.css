@@ -21,7 +21,7 @@ body{
   padding: 0px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: .1fr 1fr 0.5fr 0.5fr;
+  /*grid-template-rows: .1fr 1fr 0.5fr 0.5fr;*/
   grid-column-gap: 3px;
   grid-template-areas:
   "header header"
@@ -130,11 +130,13 @@ body{
 
 
 /*** Form Style ***/
-
+/*
 .form > * {
  font: 1.4em 'Unkempt', sans-serif;
  color: #000000;
 }
+*/
+
 .form {
   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
     0 0 0 1px rgba(0,0,0,0.04);
@@ -142,6 +144,7 @@ body{
   margin: 0px;
   padding: 0px;
 }
+
 .form_container {
   display: grid;
   grid-template-columns: [labels] .5fr [controls] 1fr;
@@ -174,4 +177,8 @@ body{
   }
 .form_container > textarea {
   min-height: 3em;
-  }
+}
+a {
+  cursor: pointer;
+}
+

@@ -2,20 +2,25 @@ import React, { Component } from 'react';
 import { FormShortText, FormLongText, FormCheckBox } from './FormTypes';
 import { Card, CardTitle, CardContent, CardButton } from './Card';
 
-export default class Form extends Component {
+export default class FormInput extends Component {
   constructor(props) {
     super(props);
     this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/';
-    this.endpoint = 'endpoint'
+    this.endpoint = 'check_lists'
     this.title = props.title;
+    this.equipId = props.match.params.id;
+    this.period = props.period;
+    this.formType = 'value';
 
     this.state = {
       formStructure: props.formStructure,
+      isEditable: false,
       hasError: false
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEditable = this.handleEditable.bind(this);
   }
 
   handleChange(e, idx) {
@@ -35,24 +40,15 @@ export default class Form extends Component {
     this.setState({ formStructure: new_state });
   }
 
-  handleRemove(idx) {
-    this.setState({
-      formStructure: this.state.formStructure.filter((s, sidx) => idx !== sidx)
-    });
-  }
-
-  handleAdd() {
-    this.setState({
-      formStructure: this.state.formStructure.concat([{
-        name: 'SME Inspection',
-        value: '',
-        type: 'FormCheckBox'
-      }])
-    });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit(e) {
+    e.preventDefault();
+    const data = {
+      title: this.title,
+      equipId: this.equipId,
+      period: this.period,
+      formType: this.formType,
+      data: this.state.formStructure
+    }
 
     fetch(this.api + this.endpoint, {
       method: 'POST',
@@ -60,13 +56,21 @@ export default class Form extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(this.state.formStructure)
-    }).catch((error) => { this.setState({ hasError:true })})
-    console.log(JSON.stringify(this.state));
+      body: JSON.stringify(data)
+    }).catch((error) => { this.setState({ hasError: true })})
+    if(!this.state.hasError){
+      this.handleEditable()
+    }
+    console.log(JSON.stringify(data));
+  }
+
+  handleEditable() {
+    this.setState({
+      isEditable: !this.state.isEditable
+    })
   }
 
   buildFormStructure() {
-    //let inputs=[];
     let TagName;
     const inputs = this.state.formStructure.map( (item, idx) => {
       if (item.type === 'FormShortText') {
@@ -88,7 +92,6 @@ export default class Form extends Component {
             value={item.value}
             handleChange={(e) => {this.handleChange(e, idx)}}
            />
-          <a onClick={() => {this.handleRemove(idx)}}>remove</a>
         </div>
       );
     });
@@ -105,17 +108,35 @@ export default class Form extends Component {
   }
 
   render() {
-    return (
-      <Card>
-        <CardTitle text={this.title} />
+    if (this.state.isEditable) {
+      return (
+        <Card>
+          <CardTitle text={this.title} />
           <CardContent>
             <form className="form" onSubmit={this.handleSubmit}>
               { this.buildFormStructure() }
-              <a onClick={() => {this.handleAdd()}}>add</a>
               { this.formError() }
               <div className="form_container"><input type="submit" text="Submit"/></div>
             </form>
           </CardContent>
+        </Card>
+      );
+    }
+    return (
+      <Card>
+        <CardTitle text={this.title} />
+        <CardContent>
+        {
+          this.state.formStructure.map((i, idx) => {
+            return (
+              <div key={idx}>
+              <p>{i.name}: {i.value}</p>
+              </div>
+            )
+          })
+        }
+        <a onClick={this.handleEditable}>Edit</a>
+        </CardContent>
       </Card>
     );
   }

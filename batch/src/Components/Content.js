@@ -3,7 +3,8 @@ import Site from './Site';
 import Equipment from './Equipment';
 import { Route, Switch } from 'react-router-dom';
 import LoginCard from './LoginCard';
-import Form from './Form';
+import FormInput from './FormInput';
+import FormContent from './FormContent';
 import CheckList from './CheckList';
 import Callback from './Callback';
 import SettingsCard from './SettingsCard';
@@ -36,6 +37,12 @@ export default class Content extends Component {
             <div>
               <Route exact path='/' component={Site} />
               <Route path='/equip/:id' component={Equipment} />
+              <Route path='/FormInput/:id' render={(props) => {
+                return <FormInput {...props} title={formTitle} formStructure={formData} period='1'/>
+              }} />
+              <Route path='/FormContent/:id' render={(props) => {
+                return <FormContent {...props} title={formTitle} formStructure={formData} period='3' />
+              }} />
               <Route path='/form/:id' component={CheckList}/>
               <Route path='/settings' component={SettingsCard} />
             </div>
