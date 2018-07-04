@@ -17,8 +17,7 @@ export default class FormContent extends Component {
       formStructure: props.formStructure,
       isEditable: false,
       hasError: false,
-      id: null,
-      oldData: null
+      id: null
     };
 
     this.handleValueChange = this.handleValueChange.bind(this);
@@ -92,12 +91,18 @@ export default class FormContent extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    if(this.state.id === null){
+      var id = 'none';
+    } else {
+      var id = this.state.id;
+    }
     const data = {
       title: this.title,
       equipmentId: this.equipId,
       period: this.period,
       formType: this.formType,
-      data: this.state.formStructure
+      data: this.state.formStructure,
+      id: id
     }
 
     fetch(this.api + this.endpoint, {

@@ -39,12 +39,16 @@ def form_data():
 def check_lists():
 
     data = request.get_json()
-    seconds = int(
-        (dt.datetime.now() - dt.datetime.strptime('1970-01-01', '%Y-%m-%d')).total_seconds()
-        )
-    id = random.randint(1, 1000000) + seconds
+    if data['id'] == 'none':
+        seconds = int(
+            (dt.datetime.now() - dt.datetime.strptime('1970-01-01', '%Y-%m-%d')).total_seconds()
+            )
+        id = random.randint(1, 1000000) + seconds
+    else:
+        id = data['id']
     sql = """INSERT INTO test.check_lists (id, equipment_id, form_data)
-            VALUES ({id}, {eID}, '{blob}')""".format(
+            VALUES ({id}, {eID}, '{blob}')
+            ON DUPLICATE KEY UPDATE form_data='{blob}' """.format(
         id=id,
         eID=data['equipmentId'],
         blob=json.dumps(data['data'])
