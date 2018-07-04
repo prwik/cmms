@@ -14,7 +14,7 @@ export default class FormContent extends Component {
     this.inputTypes = ['FormShortText', 'FormLongText', 'FormCheckBox'];
 
     this.state = {
-      formStructure: props.formStructure,
+      formStructure: [],
       isEditable: false,
       hasError: false,
       id: null
@@ -132,24 +132,28 @@ export default class FormContent extends Component {
   }
 
   buildFormStructure() {
-    const inputs = this.state.formStructure.map((item, idx) => {
-      return (
-        <div key={idx}>
-          <FormShortText
-            title='Input Name'
-            value={item.name}
-            handleChange={(e) => {this.handleValueChange(e, idx)}}
-          />
-          <FormDropDown
-            title={'Input Type'}
-            value={item.type}
-            optionArray={this.inputTypes}
-            handleChange={(e) => {this.handleTypeChange(e, idx)}}
-          />
-          <a className='form_container' onClick={() => {this.handleRemove(idx)}}>Remove Field</a>
-        </div>
-      );
-    });
+    if(this.state.formStructure !== null) {
+      var inputs = this.state.formStructure.map((item, idx) => {
+        return (
+          <div key={idx}>
+            <FormShortText
+              title='Input Name'
+              value={item.name}
+              handleChange={(e) => {this.handleValueChange(e, idx)}}
+            />
+            <FormDropDown
+              title={'Input Type'}
+              value={item.type}
+              optionArray={this.inputTypes}
+              handleChange={(e) => {this.handleTypeChange(e, idx)}}
+            />
+            <a className='form_container' onClick={() => {this.handleRemove(idx)}}>Remove Field</a>
+          </div>
+        );
+      });
+    } else {
+      var inputs = '';
+    }
     return inputs;
   }
 
@@ -163,6 +167,17 @@ export default class FormContent extends Component {
   }
 
   render() {
+    if(this.state.formStructure === null) {
+      var formData = <div/>
+    } else {
+      var formData = this.state.formStructure.map((i, idx) => {
+        return (
+          <div key={idx}>
+          <p>{i.name}: {i.type}</p>
+          </div>
+        )
+      });
+    }
     if (this.state.isEditable || this.state.hasError) {
       return (
         <Card>
@@ -182,15 +197,7 @@ export default class FormContent extends Component {
       <Card>
         <CardTitle text={this.title} />
         <CardContent>
-        {
-          this.state.formStructure.map((i, idx) => {
-            return (
-              <div key={idx}>
-              <p>{i.name}: {i.type}</p>
-              </div>
-            )
-          })
-        }
+        {formData}
         <a onClick={this.handleEditable}>Edit</a>
         </CardContent>
       </Card>
