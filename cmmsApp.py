@@ -54,7 +54,7 @@ def check_lists():
         blob=json.dumps(data['data'])
         )
     engine.execute(sql)
-
+    data['id'] = id
     return jsonify(data)
 
 @app.route("/equipment")

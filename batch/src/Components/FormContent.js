@@ -30,10 +30,12 @@ export default class FormContent extends Component {
     fetch(this.api + '/form_data?equipId=' + this.equipId)
       .then((results) => results.json())
       .then((resJson) => {
-        this.setState({
-          id: resJson[0].id,
-          formStructure: resJson[0].form_data
-        });
+        if(resJson.length > 0) {
+          this.setState({
+            id: resJson[0].id,
+            formStructure: resJson[0].form_data
+          });
+      }
       });
   }
 
@@ -112,9 +114,15 @@ export default class FormContent extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data)
-    }).catch((error) => { this.setState({ hasError: true })})
+    })
+    .then((response) => response.json())
+    .then((resJson) => {
+      this.setState({
+        id: resJson.id
+      });
+    })
+    .catch((error) => { this.setState({ hasError: true })})
     this.handleEditable();
-    console.log(JSON.stringify(data));
   }
 
   handleEditable() {
