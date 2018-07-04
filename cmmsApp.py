@@ -31,7 +31,7 @@ def form_data():
         response.append({
             'id': row[0],
             'equipId': row[1],
-            'form_data': row[2]
+            'form_data': json.loads(row[2])
             })
     return json.dumps(response)
 
