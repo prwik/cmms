@@ -16,6 +16,25 @@ app = Flask(__name__)
 def hello():
     return "Flask Index Page"
 
+@app.route("/form_data")
+def form_data():
+    equipId = request.args.get('equipId')
+    sql = """
+        SELECT id, equipment_id, form_data
+        FROM test.check_lists
+        WHERE equipment_id = {0}
+    """.format(equipId)
+
+    res = engine.execute(sql).fetchall()
+    response = []
+    for row in res:
+        response.append({
+            'id': row[0],
+            'equipId': row[1],
+            'form_data': row[2]
+            })
+    return json.dumps(response)
+
 @app.route("/check_lists", methods=['POST'])
 def check_lists():
 

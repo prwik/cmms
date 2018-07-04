@@ -16,13 +16,25 @@ export default class FormContent extends Component {
     this.state = {
       formStructure: props.formStructure,
       isEditable: false,
-      hasError: false
+      hasError: false,
+      id: null
     }
 
     this.handleValueChange = this.handleValueChange.bind(this);
     this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEditable = this.handleEditable.bind(this);
+  }
+
+  componentDidMount() {
+    fetch(this.api + '/form_data?equipId=' + this.equipId)
+      .then((results) => results.json())
+      .then((data) => {
+        this.setState({
+          id: data.id,
+          formStructure: data.form_data
+        });
+    });
   }
 
   handleValueChange(e, idx) {
@@ -81,7 +93,7 @@ export default class FormContent extends Component {
     e.preventDefault();
     const data = {
       title: this.title,
-      equipId: this.equipId,
+      equipmentId: this.equipId,
       period: this.period,
       formType: this.formType,
       data: this.state.formStructure
