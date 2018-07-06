@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -10,7 +11,7 @@ import {
   //UncontrolledDropdown,
   //DropdownToggle,
   //DropdownMenu,
-  //DropdownItem 
+  //DropdownItem
 } from 'reactstrap';
 
 export default class Navigation extends Component {
@@ -38,7 +39,7 @@ export default class Navigation extends Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props.auth;
+    // const { isAuthenticated } = this.props.auth;
 
     return (
       <div>
@@ -48,12 +49,14 @@ export default class Navigation extends Component {
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
               <NavItem>
-                <NavLink href='/'>Sites</NavLink>
+                <Link to={'/sites'}>
+                  Sites
+                </Link>
               </NavItem>
               <NavItem>
                 <NavLink href="/settings">Settings</NavLink>
               </NavItem>
-              {
+              {/* {
                 !isAuthenticated() ? (
                   <NavItem>
                     <NavLink
@@ -66,14 +69,14 @@ export default class Navigation extends Component {
                 :
                 (
                   <NavItem>
-                    <NavLink 
+                    <NavLink
                       href="/"
                       onClick={this.logout.bind(this)}
                       >Logout
                     </NavLink>
                   </NavItem>
                 )
-              }
+              } */}
             </Nav>
           </Collapse>
 

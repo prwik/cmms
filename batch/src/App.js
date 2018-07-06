@@ -7,13 +7,12 @@ import Content from './Components/Content';
 import Auth from './Auth/Auth';
 
 export default class App extends Component {
-  auth = new Auth();
 
   render() {
     return (
       <div>
-        <Navigation auth={this.auth}/>
-        <Content auth={this.auth}/>
+        <Navigation />
+        <Content />
       </div>
     );
   }
