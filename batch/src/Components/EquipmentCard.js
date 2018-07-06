@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardTitle, CardContent } from './Card';
 import { Link } from 'react-router-dom';
+import { uriSubDir } from '../Data/globalVars'
 
 export default class EquipmentCard extends Component {
 
@@ -13,10 +14,10 @@ export default class EquipmentCard extends Component {
             <CardContent text={ this.props.manufacturer } />
             <CardContent text={ this.props.description } />
           </CardContent>
-          <Link to={'/form/' + this.props.id}>
+          <Link to={ uriSubDir + '/form/' + this.props.id}>
             <div className="card_buttons">Check List</div>
           </Link>
-          <Link to={'/FormContent/' + this.props.id}>
+          <Link to={ uriSubDir + '/FormContent/' + this.props.id}>
             <div className="card_button">New</div>
           </Link>
           <Link to='/'>

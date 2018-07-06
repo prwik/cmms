@@ -9,24 +9,26 @@ import CheckList from './CheckList';
 import Callback from './Callback';
 import SettingsCard from './SettingsCard';
 import { formData, formTitle } from '../Data/FormData';
+import { uriSubDir } from '../Data/globalVars'
 
 export default class Content extends Component {
 
   render() {
+    console.log(uriSubDir);
   	return (
   	<div className="body-content">
   		<Switch>
-              <Route exact path='/test/' component={Site} />
-              <Route exact path='/sites' component={Site} />
-              <Route path='/equip/:id' component={Equipment} />
-              <Route path='/FormInput/:id' render={(props) => {
+              <Route exact path={uriSubDir + '/test/'} component={Site} />
+              <Route exact path={uriSubDir + '/sites'} component={Site} />
+              <Route path={uriSubDir + '/equip/:id'} component={Equipment} />
+              <Route path={uriSubDir + '/FormInput/:id'} render={(props) => {
                 return <FormInput {...props} title={formTitle} formStructure={formData} period='1'/>
               }} />
-              <Route path='/FormContent/:id' render={(props) => {
+              <Route path={uriSubDir + '/FormContent/:id'} render={(props) => {
                 return <FormContent {...props} title={formTitle} formStructure={formData} period='3' />
               }} />
-              <Route path='/form/:id' component={CheckList}/>
-              <Route path='/settings' component={SettingsCard} />
+              <Route path={uriSubDir + '/form/:id'} component={CheckList}/>
+              <Route path={uriSubDir + '/settings'} component={SettingsCard} />
               <Route component={Site} />
       </Switch>
     </div>

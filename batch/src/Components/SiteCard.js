@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardTitle, CardContent } from './Card';
+import { uriSubDir } from '../Data/globalVars'
 
 export default class SiteCard extends Component {
-/*
-  iterateObject(object){
-    let list = '';
-    for (let key in object){
-      list += object[key] + ' ';
-    }
-    return list;
-  }
-*/
+
   render(){
     return (
       <div>
@@ -22,7 +15,7 @@ export default class SiteCard extends Component {
             {this.props.data.city + ', ' + this.props.data.state + ' ' + this.props.data.zip}
             </p>
           </CardContent>
-          <Link to={ '/equip/'+ this.props.id }>
+          <Link to={ uriSubDir + '/equip/'+ this.props.id }>
               <div className='card_buttons'>Equipment</div>
           </Link>
           <Link to='/addSite/'>
