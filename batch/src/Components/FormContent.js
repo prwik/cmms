@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FormShortText, FormCheckBox, FormDropDown } from './FormTypes';
-import { Card, CardTitle, CardContent, CardButton } from './Card';
+import { Card, CardTitle, CardContent, CardFooter, CardFuncButton } from './Card';
+import { Edit2 } from 'react-feather';
 
 export default class FormContent extends Component {
   constructor(props) {
@@ -198,8 +199,14 @@ export default class FormContent extends Component {
         <CardTitle text={this.title} />
         <CardContent>
         {formData}
-        <a onClick={this.handleEditable}>Edit</a>
         </CardContent>
+        <CardFooter buttons={
+          <CardFuncButton
+            text='Edit'
+            clickHandle={this.handleEditable}
+            icon={<Edit2 size={18}/>}
+          />
+        }/>
       </Card>
     );
   }

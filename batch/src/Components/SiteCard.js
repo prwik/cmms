@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardTitle, CardContent } from './Card';
+import { Card, CardTitle, CardContent, CardFooter, CardLinkButton } from './Card';
 import { uriSubDir } from '../Data/globalVars'
+import { Clipboard } from 'react-feather';
 
 export default class SiteCard extends Component {
 
@@ -15,12 +16,13 @@ export default class SiteCard extends Component {
             {this.props.data.city + ', ' + this.props.data.state + ' ' + this.props.data.zip}
             </p>
           </CardContent>
-          <Link to={ uriSubDir + '/equip/'+ this.props.id }>
-              <div className='card_buttons'>Equipment</div>
-          </Link>
-          <Link to='/addSite/'>
-              <div className='card_buttons'>Add/Remove</div>
-          </Link>
+          <CardFooter buttons={[
+            <CardLinkButton
+              icon={<Clipboard size={18}/>}
+              link={uriSubDir + '/equip/' + this.props.id}
+              text={'Equipment'}
+            />
+          ]}/>
         </Card>
       </div>
     );

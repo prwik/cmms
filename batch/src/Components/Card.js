@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import '../Styles/Card.css';
+import { Link } from 'react-router-dom';
 
 class Card extends Component {
 
@@ -34,15 +36,42 @@ class CardContent extends Component {
   }
 }
 
-class CardButton extends Component {
+class CardFooter extends Component {
 
   render(){
     return (
-      <div className='card_buttons' onClick={this.props.handleClick}>
-          {this.props.text}
+      <div className='card_footer'>
+        {this.props.buttons}
       </div>
     );
   }
 }
 
-export { Card, CardTitle, CardContent, CardButton }
+class CardLinkButton extends Component {
+
+  render(){
+    return (
+        <Link className='card_btn' to={ this.props.link}>
+          {this.props.icon}
+          <span className='spacer'></span>
+          {this.props.text}
+        </Link>
+    );
+  }
+}
+
+class CardFuncButton extends Component {
+
+  render(){
+    return (
+        <span className='card_btn' onClick={ this.props.clickHandle}>
+          {this.props.icon}
+          <span className='spacer'></span>
+          {this.props.text}
+        </span>
+    );
+  }
+}
+
+
+export { Card, CardTitle, CardContent, CardFooter, CardLinkButton, CardFuncButton }
