@@ -9,7 +9,7 @@ export default class FormInput extends Component {
     this.endpoint = 'check_lists'
     this.title = props.title;
     this.equipId = props.match.params.id;
-    this.period = props.period;
+    this.frequency = props.frequency;
     this.formType = 'value';
 
     this.state = {
@@ -45,7 +45,7 @@ export default class FormInput extends Component {
     const data = {
       title: this.title,
       equipId: this.equipId,
-      period: this.period,
+      frequency: this.frequency,
       formType: this.formType,
       data: this.state.formStructure
     }

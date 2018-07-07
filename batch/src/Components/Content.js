@@ -22,10 +22,10 @@ export default class Content extends Component {
               <Route exact path={uriSubDir + '/sites'} component={Site} />
               <Route path={uriSubDir + '/equip/:id'} component={Equipment} />
               <Route path={uriSubDir + '/FormInput/:id'} render={(props) => {
-                return <FormInput {...props} title={formTitle} formStructure={formData} period='1'/>
+                return <FormInput {...props} title={formTitle} formStructure={formData} frequency='1'/>
               }} />
               <Route path={uriSubDir + '/FormContent/:id'} render={(props) => {
-                return <FormContent {...props} title={formTitle} formStructure={formData} period='3' />
+                return <FormContent {...props} title={formTitle} formStructure={formData} frequency='3'/>
               }} />
               <Route path={uriSubDir + '/form/:id'} component={CheckList}/>
               <Route path={uriSubDir + '/settings'} component={SettingsCard} />
