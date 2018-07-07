@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormShortText, FormCheckBox, FormDropDown } from './FormTypes';
+import { FormShortText, FormLongText, FormCheckBox, FormDropDown } from './FormTypes';
 import { Card, CardTitle, CardContent, CardFooter, CardFuncButton } from './Card';
 import { Edit2 } from 'react-feather';
 
@@ -10,7 +10,7 @@ export default class FormContent extends Component {
     this.endpoint = 'check_lists'
     this.title = props.title;
     this.equipId = props.match.params.id;
-    this.period = props.period;
+    this.frequency = props.frequency;
     this.formType = 'template';
     this.inputTypes = ['FormShortText', 'FormLongText', 'FormCheckBox'];
 
@@ -43,7 +43,6 @@ export default class FormContent extends Component {
   handleValueChange(e, idx) {
     const target = e.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
 
     let new_state = this.state.formStructure;
 
@@ -61,7 +60,6 @@ export default class FormContent extends Component {
   handleTypeChange(e, idx) {
     const target = e.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
 
     let new_state = this.state.formStructure;
 
@@ -99,10 +97,11 @@ export default class FormContent extends Component {
     } else {
       var id = this.state.id;
     }
+
     const data = {
       title: this.title,
       equipmentId: this.equipId,
-      period: this.period,
+      frequency: this.frequency,
       formType: this.formType,
       data: this.state.formStructure,
       id: id
@@ -167,38 +166,54 @@ export default class FormContent extends Component {
     }
   }
 
-  render() {
+  editForm() {
+    return (
+      <Card>
+        <CardTitle text={this.title} />
+        <CardContent>
+          <form className="form" onSubmit={this.handleSubmit}>
+            <FormShortText title='Frequency' value={this.frequency} readOnly='true'/>
+            { this.buildFormStructure() }
+            <a className="form_container" onClick={() => {this.handleAdd()}}>Add Field</a>
+            { this.formError() }
+            <div className="form_container"><input type="submit" text="Submit"/></div>
+          </form>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  viewForm(formData) {
+    function typeConversion(i){
+      if (i.type === 'FormShortText') {
+        return <FormShortText title={i.name} readOnly='true'/>
+      }
+      else if (i.type === 'FormLongText') {
+        return <FormLongText title={i.name} readOnly='true'/>
+      }
+      else if (i.type === 'FormCheckBox') {
+        return <FormCheckBox title={i.name} readOnly='true'/>
+      }
+    }
+
     if(this.state.formStructure === null) {
       var formData = <div/>
     } else {
       var formData = this.state.formStructure.map((i, idx) => {
         return (
           <div key={idx}>
-          <p>{i.name}: {i.type}</p>
+            {typeConversion(i)}
           </div>
         )
       });
     }
-    if (this.state.isEditable || this.state.hasError) {
-      return (
-        <Card>
-          <CardTitle text={this.title} />
-          <CardContent>
-            <form className="form" onSubmit={this.handleSubmit}>
-              { this.buildFormStructure() }
-              <a className="form_container" onClick={() => {this.handleAdd()}}>Add Field</a>
-              { this.formError() }
-              <div className="form_container"><input type="submit" text="Submit"/></div>
-            </form>
-          </CardContent>
-        </Card>
-      );
-    }
+
     return (
       <Card>
         <CardTitle text={this.title} />
         <CardContent>
-        {formData}
+          <FormShortText title='Frequency' value={this.frequency} readOnly='true'/>
+          {formData}
         </CardContent>
         <CardFooter buttons={
           <CardFuncButton
@@ -208,6 +223,13 @@ export default class FormContent extends Component {
           />
         }/>
       </Card>
-    );
+    )    
+  }
+
+  render() {
+    if (this.state.isEditable || this.state.hasError) {
+      return this.editForm();
+    }
+      return this.viewForm();
   }
 }

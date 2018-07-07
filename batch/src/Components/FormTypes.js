@@ -6,7 +6,7 @@ function FormShortText(props) {
       <label htmlFor={props.title}>
         {props.title}
       </label>
-      <input type="text" name={props.title} id={props.title} value={props.value} placeholder={'Enter Value'} onChange={props.handleChange} />
+      <input type="text" name={props.title} id={props.title} value={props.value} placeholder={'Enter a value...'} onChange={props.handleChange} readOnly={props.readOnly}/>
     </div>
   );
 }
@@ -17,7 +17,7 @@ function FormLongText(props) {
       <label htmlFor={props.title}>
         {props.title}
       </label>
-      <textarea name={props.title} id={props.title} value={props.value} onChange={props.handleChange} />
+      <textarea name={props.title} id={props.title} value={props.value} placeholder={'Enter a value...'} onChange={props.handleChange} readOnly={props.readOnly}/>
     </div>
   );
 }
@@ -28,7 +28,7 @@ function FormCheckBox(props) {
       <label htmlFor={props.title}>
         {props.title}
       </label>
-      <input type="checkbox" name={props.title} id={props.title} value={props.value} onChange={props.handleChange} />
+      <input type="checkbox" name={props.title} id={props.title} value={props.value} onChange={props.handleChange} readOnly={props.readOnly}/>
     </div>
   );
 }
