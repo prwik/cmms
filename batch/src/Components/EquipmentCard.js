@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardTitle, CardContent, CardFooter, CardLinkButton } from './Card';
 import { Link } from 'react-router-dom';
 import { uriSubDir } from '../Data/globalVars';
-import { FileText } from 'react-feather';
+import { FileText, CheckSquare } from 'react-feather';
 
 export default class EquipmentCard extends Component {
 
@@ -19,7 +19,12 @@ export default class EquipmentCard extends Component {
             <CardLinkButton
               icon={<FileText size={18}/>}
               link={uriSubDir + '/FormContent/' + this.props.id}
-              text={'View CheckList'}
+              text={'Edit CheckList'}
+            />,
+            <CardLinkButton
+              icon={<CheckSquare size={18}/>}
+              link={uriSubDir + '/FormInput/' + this.props.id}
+              text={'Fill Out CheckList'}
             />
           ]}/>
         </Card>

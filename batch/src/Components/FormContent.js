@@ -166,7 +166,7 @@ export default class FormContent extends Component {
     }
   }
 
-  editableForm() {
+  editForm() {
     return (
       <Card>
         <CardTitle text={this.title} />
@@ -228,7 +228,7 @@ export default class FormContent extends Component {
 
   render() {
     if (this.state.isEditable || this.state.hasError) {
-      return this.editableForm();
+      return this.editForm();
     }
       return this.viewForm();
   }
