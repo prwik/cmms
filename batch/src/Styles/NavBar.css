@@ -1,0 +1,50 @@
+.navbar{
+  height: 45px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  margin-bottom: 20px;
+  z-index: 3;
+  /* background-color: #6ad4e2; */
+  background-color: #2196F3;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16),
+    0 0 0 1px rgba(0,0,0,0.04);
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+  "menu filler"
+}
+
+.menu{
+  grid-area: menu;
+  color: #fff;
+  cursor: pointer;
+}
+
+.menu span{
+  margin-left: 10px;
+  position: relative;
+  top: -5px;
+}
+
+.menu a{
+  color: #fff;
+}
+
+.menu a:hover{
+  text-decoration: none;
+}
+
+.dropdown{
+  background-color: #2196F3;
+  width: 150px;
+}
+
+.dropdown div{
+  padding: 5px;
+}
+
+.dropdown div:hover{
+  background-color: #90CAF9;
+}
