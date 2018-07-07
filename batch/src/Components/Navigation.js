@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { uriSubDir } from '../Data/globalVars';
 import {
   Collapse,
   Navbar,
@@ -45,11 +46,11 @@ export default class Navigation extends Component {
       <div>
         <Navbar color="faded" light>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-          <NavbarBrand href="/" className="mr-auto">cmms App</NavbarBrand>
+          <NavbarBrand href={uriSubDir + "/"} className="mr-auto">cmms App</NavbarBrand>
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
               <NavItem>
-                <Link to={'/sites'}>
+                <Link to={ uriSubDir + '/sites'}>
                   Sites
                 </Link>
               </NavItem>
