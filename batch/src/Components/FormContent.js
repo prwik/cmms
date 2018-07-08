@@ -135,20 +135,24 @@ export default class FormContent extends Component {
     if(this.state.formStructure !== null) {
       var inputs = this.state.formStructure.map((item, idx) => {
         return (
-          <div key={idx}>
-            <FormShortText
-              title='Input Name'
-              value={item.name}
-              handleChange={(e) => {this.handleValueChange(e, idx)}}
-            />
-            <FormDropDown
-              title={'Input Type'}
-              value={item.type}
-              optionArray={this.inputTypes}
-              handleChange={(e) => {this.handleTypeChange(e, idx)}}
-            />
-            <a className='form_container' onClick={() => {this.handleRemove(idx)}}>Remove Field</a>
-          </div>
+          <Card key={idx}>
+            <CardContent>
+              <div>
+                <FormShortText
+                  title='Input Name'
+                  value={item.name}
+                  handleChange={(e) => {this.handleValueChange(e, idx)}}
+                />
+                <FormDropDown
+                  title={'Input Type'}
+                  value={item.type}
+                  optionArray={this.inputTypes}
+                  handleChange={(e) => {this.handleTypeChange(e, idx)}}
+                />
+                <a onClick={() => {this.handleRemove(idx)}}>Remove Field</a>
+              </div>
+            </CardContent>
+          </Card>
         );
       });
     } else {
