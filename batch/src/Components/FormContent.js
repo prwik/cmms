@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormShortText, FormLongText, FormCheckBox, FormDropDown } from './FormTypes';
 import { Card, CardTitle, CardContent, CardFooter, CardFuncButton } from './Card';
-import { Edit2 } from 'react-feather';
+import { Edit2, Delete, Plus, Send } from 'react-feather';
 
 export default class FormContent extends Component {
   constructor(props) {
@@ -149,9 +149,15 @@ export default class FormContent extends Component {
                   optionArray={this.inputTypes}
                   handleChange={(e) => {this.handleTypeChange(e, idx)}}
                 />
-                <a onClick={() => {this.handleRemove(idx)}}>Remove Field</a>
               </div>
             </CardContent>
+            <CardFooter buttons={
+              <CardFuncButton
+                text='Delete'
+                clickHandle={() => {(this.handleRemove(idx))}}
+                icon={<Delete size={18}/>}
+              />
+            }/>
           </Card>
         );
       });
@@ -170,19 +176,46 @@ export default class FormContent extends Component {
     }
   }
 
+  daysToFrequencyName(days){
+    switch(days){
+      case '7':
+        return 'Weekly';
+      case '30':
+        return 'Monthly';
+      case '90':
+        return 'Quarterly';
+      case '365':
+        return 'Yearly';
+      default:
+        return days;
+    }
+  }
+
   editForm() {
     return (
       <Card>
         <CardTitle text={this.title} />
         <CardContent>
-          <form className="form" onSubmit={this.handleSubmit}>
-            <FormShortText title='Frequency' value={this.frequency} readOnly='true'/>
+            <FormShortText title='Frequency' value={this.daysToFrequencyName(this.frequency)} readOnly='true'/>
             { this.buildFormStructure() }
-            <a className="form_container" onClick={() => {this.handleAdd()}}>Add Field</a>
-            { this.formError() }
-            <div className="form_container"><input type="submit" text="Submit"/></div>
-          </form>
+            <div className="form_container">
+              { this.formError() }
+            </div>
         </CardContent>
+        <CardFooter buttons={
+          <div>
+          <CardFuncButton
+            text='Add'
+            clickHandle={() => {(this.handleAdd())}}
+            icon={<Plus size={18}/>}
+          />
+          <CardFuncButton
+            text='Submit'
+            clickHandle={this.handleSubmit}
+            icon={<Send size={18}/>}
+          />
+          </div>
+        }/>
       </Card>
     )
   }
@@ -216,7 +249,7 @@ export default class FormContent extends Component {
       <Card>
         <CardTitle text={this.title} />
         <CardContent>
-          <FormShortText title='Frequency' value={this.frequency} readOnly='true'/>
+          <FormShortText title='Frequency' value={this.daysToFrequencyName(this.frequency)} readOnly='true'/>
           {formData}
         </CardContent>
         <CardFooter buttons={
