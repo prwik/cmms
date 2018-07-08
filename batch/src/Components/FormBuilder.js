@@ -100,7 +100,7 @@ class Step extends Component {
           <div>
             <textarea
               rows="3"
-              cols="50"
+              cols="35"
               id="test"
               placeholder="Enter step intructions"
               name="instruction"
