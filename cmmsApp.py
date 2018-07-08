@@ -37,7 +37,6 @@ def form_data():
 
 @app.route("/check_lists", methods=['POST'])
 def check_lists():
-    print 'yes'
     data = request.get_json()
     if data['id'] == 'none':
         seconds = int(
@@ -53,8 +52,7 @@ def check_lists():
         eID=data['equipmentId'],
         blob=json.dumps(data['data'])
         )
-    # engine.execute(sql)
-    print sql
+    engine.execute(sql)
     data['id'] = id
     return jsonify(data)
 
