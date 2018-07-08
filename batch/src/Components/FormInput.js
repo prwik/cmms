@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormShortText, FormLongText, FormCheckBox } from './FormTypes';
 import { Card, CardTitle, CardContent, CardButton, CardFooter, CardFuncButton } from './Card';
-import { Edit2 } from 'react-feather';
+import { Edit2, Delete, Plus, Send } from 'react-feather';
 
 export default class FormInput extends Component {
   constructor(props) {
@@ -130,18 +130,39 @@ export default class FormInput extends Component {
     }
   }
 
+  daysToFrequencyName(days){
+    switch(days){
+      case '7':
+        return 'Weekly';
+      case '30':
+        return 'Monthly';
+      case '90':
+        return 'Quarterly';
+      case '365':
+        return 'Yearly';
+      default:
+        return days;
+    }
+  }
+
   editForm() {
     return(
       <Card>
         <CardTitle text={this.title} />
         <CardContent>
-          <form className="form" onSubmit={this.handleSubmit}>
-            <FormShortText title='Frequency' value={this.frequency} readOnly='true'/>
+            <FormShortText title='Frequency' value={this.daysToFrequencyName(this.frequency)} readOnly='true'/>
             { this.buildFormStructure() }
-            { this.formError() }
-            <div className="form_container"><input type="submit" text="Submit"/></div>
-          </form>
+            <div className="form_container">
+              { this.formError() }
+            </div>
         </CardContent>
+        <CardFooter buttons={
+          <CardFuncButton
+            text='Submit'
+            clickHandle={this.handleSubmit}
+            icon={<Send size={18}/>}
+          />
+        }/>
       </Card>
     );
   }
@@ -163,7 +184,7 @@ export default class FormInput extends Component {
       <Card>
         <CardTitle text={this.title} />
         <CardContent>
-          <FormShortText title='Frequency' value={this.frequency} readOnly='true'/>
+          <FormShortText title='Frequency' value={this.daysToFrequencyName(this.frequency)} readOnly='true'/>
           {formData}
         </CardContent>
         <CardFooter buttons={
@@ -175,12 +196,7 @@ export default class FormInput extends Component {
         }/>
       </Card>
     );
-
-
-
   }
-
-
 
   render() {
     if (this.state.isEditable) {
