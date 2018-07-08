@@ -1,0 +1,17 @@
+.form-card{
+  margin: 10px;;
+}
+.add-step{
+  cursor: pointer;
+}
+.spacer{
+  height: 10px;
+}
+
+.hspacer{
+  margin: 10px;
+}
+
+.add-btn{
+  cursor: pointer;
+}

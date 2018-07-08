@@ -36,7 +36,8 @@
 }
 
 .dropdown{
-  background-color: #2196F3;
+  background-color: #F5F5F5;
+  color: #757575;
   width: 150px;
 }
 
@@ -46,4 +47,8 @@
 
 .dropdown div:hover{
   background-color: #90CAF9;
+}
+
+.dropdown a{
+  color: #757575;
 }

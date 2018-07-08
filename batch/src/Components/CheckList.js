@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import '../Styles/CheckList.css'
+import '../Styles/CheckList.css';
+import { Card, CardContent } from './Card';
 
 export default class CheckList extends Component {
 	constructor() {
@@ -9,7 +10,6 @@ export default class CheckList extends Component {
         steps: [],
         currenStep: {
           instruction: '',
-          label: '',
           type: ''
         }
       }
@@ -31,7 +31,6 @@ export default class CheckList extends Component {
     currenStep['stepNum'] = stepNum;
     if(
       this.refs.instruction.value != '' &&
-      this.refs.label.value != '' &&
       this.refs.stepType.value != 'pickOne'
     ) {
 
@@ -40,12 +39,10 @@ export default class CheckList extends Component {
         steps: steps,
         currenStep: {
             instruction: '',
-            label: '',
             type: stepType,
           }
        });
       this.refs.instruction.value = '';
-      this.refs.label.value = '';
     }
 
   }
@@ -70,7 +67,8 @@ export default class CheckList extends Component {
 
 	render(){
 		return(
-      <div>
+      <Card>
+				<CardContent>
         <div className="step-form">
           <textarea
             rows="3"
@@ -81,14 +79,6 @@ export default class CheckList extends Component {
             ref="instruction"
             onChange={this.updateStep}
           />
-          <div className="spacer"/>
-          <input
-            type="text"
-            name="label"
-            placeholder="Label"
-            ref="label"
-            onChange={this.updateStep}
-           />
           <div className="spacer"/>
           Entry Type <br/>
           <select name="type" onChange={this.updateStep} ref="stepType">
@@ -108,7 +98,8 @@ export default class CheckList extends Component {
 					remove={this.removeStep}
 					equipmentId={this.state.equipmentId}
 				/>
-      </div>
+			</CardContent>
+      </Card>
 		);
 	}
 }
@@ -142,7 +133,6 @@ class Steps extends Component {
             key={step.stepNum}
             stepNum={step.stepNum + 1}
             instruction={step.instruction}
-            label={step.label}
             stepType={step.type}
             remove={this.props.remove}
           />
@@ -182,7 +172,6 @@ class Step extends Component {
           <tr>
             <td>{this.props.stepNum}.</td>
             <td>{this.props.instruction}</td>
-            <td>{this.props.label}</td>
             <td>{this.stepType[this.props.stepType]}</td>
             <td onClick={() => this.props.remove(this.props.stepNum - 1)}>
               <div className="remove-container">

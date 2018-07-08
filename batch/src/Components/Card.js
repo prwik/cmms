@@ -42,6 +42,7 @@ class CardFooter extends Component {
     return (
       <div className='card_footer'>
         {this.props.buttons}
+        {this.props.children}
       </div>
     );
   }

@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import LoginCard from './LoginCard';
 import FormInput from './FormInput';
 import FormContent from './FormContent';
-import CheckList from './CheckList';
+import FormBuilder from './FormBuilder';
 import Callback from './Callback';
 import SettingsCard from './SettingsCard';
 import { formData, formTitle } from '../Data/FormData';
@@ -14,7 +14,6 @@ import { uriSubDir } from '../Data/globalVars'
 export default class Content extends Component {
 
   render() {
-    console.log(uriSubDir);
   	return (
   	<div className="body-content">
   		<Switch>
@@ -27,7 +26,7 @@ export default class Content extends Component {
               <Route path={uriSubDir + '/FormContent/:id'} render={(props) => {
                 return <FormContent {...props} title={formTitle} formStructure={formData} frequency='3'/>
               }} />
-              <Route path={uriSubDir + '/form/:id'} component={CheckList}/>
+              <Route path={uriSubDir + '/build_form'} component={FormBuilder}/>
               <Route path={uriSubDir + '/settings'} component={SettingsCard} />
               <Route component={Site} />
       </Switch>
