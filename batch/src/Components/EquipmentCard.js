@@ -17,14 +17,10 @@ export default class EquipmentCard extends Component {
           </CardContent>
           <CardFooter buttons={[
             <CardLinkButton
+              key={0}
               icon={<FileText size={18}/>}
-              link={uriSubDir + '/FormContent/' + this.props.id}
-              text={'Edit CheckList'}
-            />,
-            <CardLinkButton
-              icon={<CheckSquare size={18}/>}
-              link={uriSubDir + '/FormInput/' + this.props.id}
-              text={'Fill Out CheckList'}
+              link={uriSubDir + '/build_form/' + this.props.id}
+              text={'Checklist'}
             />
           ]}/>
         </Card>

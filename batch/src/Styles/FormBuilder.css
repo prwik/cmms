@@ -15,3 +15,7 @@
 .add-btn{
   cursor: pointer;
 }
+
+.hspacer-big{
+  margin: 25px;
+}

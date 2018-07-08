@@ -223,7 +223,7 @@ export default class FormContent extends Component {
           />
         }/>
       </Card>
-    )    
+    )
   }
 
   render() {

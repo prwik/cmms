@@ -34,7 +34,7 @@ export default class NavBar extends Component {
         className="dropdown"
         onMouseLeave={( ()=>this.setState({showMenu: false}) )}
       >
-        <div><Link to={ uriSubDir + '/build_form'}>Checklist</Link></div>
+        <div><Link to={ uriSubDir + '/build_form/1'}>Checklist</Link></div>
         <div><a>Link2</a></div>
         <div><a>Link3</a></div>
       </div>;

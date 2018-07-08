@@ -1,42 +1,129 @@
 import React, { Component } from 'react';
 import '../Styles/FormBuilder.css';
-import { Card, CardContent, CardFooter, CardFuncButton } from './Card';
-import { Save, Edit2, PlusCircle, X } from 'react-feather';
+import { Card, CardFooter, CardFuncButton } from './Card';
+import { Save, Edit2, PlusCircle, Delete, CornerDownRight } from 'react-feather';
 
 export default class FormBuilder extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       numSteps: 1,
-      steps:[]
+      steps:[],
+      formData: {},
+      id: null
     };
 
     this.addStep = this.addStep.bind(this);
     this.removeStep = this.removeStep.bind(this);
+    this.changeStep = this.changeStep.bind(this);
+    this.submitData = this.submitData.bind(this);
+    this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api';
+    this.endpoint = '/check_lists';
+    this.equipId = props.match.params.id;
   }
 
   componentDidMount() {
-    this.setState({
-      steps: [<Step key={1} stepNum={1} removeStep={this.removeStep}/>]
-    });
+    fetch(this.api + '/form_data?equipId=' + this.equipId)
+      .then(response => response.json())
+      .then(resJson => {
+        const data = resJson[0];
+        var steps = []
+        for(var key in data.form_data) {
+          steps.push(
+            <Step
+              key={key}
+              stepNum={key}
+              removeStep={this.removeStep}
+              handleChange={this.changeStep}
+              data={data.form_data[key]}
+              canEdit={false}
+            />
+          );
+        }
+
+        this.setState({
+          id: data.id,
+          numSteps: steps.length,
+          formData: data.form_data,
+          steps: steps
+        });
+
+      })
+      .catch(error => console.log(error));
   }
 
   addStep(){
     var steps = this.state.steps;
     const num = this.state.numSteps + 1;
-    steps.push(<Step key={num} stepNum={num} removeStep={this.removeStep}/>);
-    this.setState({steps: steps, numSteps: num}) ;
+    var formData = this.state.formData;
+    const data = {
+      instruction: '',
+      type: 'checkBox'
+    }
+    steps.push(
+      <Step
+        key={num}
+        stepNum={num}
+        removeStep={this.removeStep}
+        handleChange={this.changeStep}
+        data={data}
+        canEdit={true}
+      />);
+    this.setState({
+      numSteps: num,
+    }) ;
   }
 
   removeStep(i) {
     const steps = this.state.steps;
+    var data = this.state.formData;
+    delete data[i];
     var newSteps = []
     for(var t = 0; t < steps.length; t++) {
-      if(steps[t].props.stepNum != i){
+      if(steps[t].props.stepNum !== i){
         newSteps.push(steps[t]);
       }
     }
-    this.setState({steps: newSteps});
+    this.setState({steps: newSteps, formData: data});
+  }
+
+  changeStep(data) {
+    var state = this.state.formData;
+    state[data.stepNum] = {
+      instruction: data.instruction,
+      type: data.type
+    };
+    this.setState({formData: state});
+  }
+
+  submitData() {
+    if(this.state.id === null){
+      var id = 'none';
+    } else {
+      var id = this.state.id;
+    }
+
+    const data = {
+      equipmentId: this.equipId,
+      data: this.state.formData,
+      id: id
+    }
+    // 'http://127.0.0.1:5000'
+    fetch(this.api + this.endpoint, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    })
+    .then((response) => response.json())
+    .then((resJson) => {
+      this.setState({
+        id: resJson.id
+      });
+    })
+    .catch((error) => { this.setState({ hasError: true })})
   }
 
   render() {
@@ -45,8 +132,10 @@ export default class FormBuilder extends Component {
         <div>
           {this.state.steps}
         </div>
-        <div className='add-btn' onClick={this.addStep}>
-          <PlusCircle color={'#9E9E9E'}/>
+        <div className='add-btn'>
+          <PlusCircle onClick={this.addStep} color={'#9E9E9E'}/>
+          <span className='hspacer-big'/>
+          <CornerDownRight onClick={this.submitData} color={'#9E9E9E'}/>
         </div>
       </div>
     );
@@ -67,7 +156,12 @@ class Step extends Component {
   }
 
   componentDidMount() {
-    this.setState({instruction: this.props.text});
+
+    this.setState({
+      instruction: this.props.data.instruction,
+      type: this.props.data.type,
+      canEdit: this.props.canEdit
+    });
   }
 
   updateStep(event) {
@@ -80,6 +174,9 @@ class Step extends Component {
 
   saveStep() {
     this.setState({canEdit: false});
+    var data = this.state;
+    data['stepNum'] = this.props.stepNum;
+    this.props.handleChange(data);
   }
 
   editStep() {
@@ -104,7 +201,6 @@ class Step extends Component {
               id="test"
               placeholder="Enter step intructions"
               name="instruction"
-              ref="instruction"
               onChange={this.updateStep}
               value={this.state.instruction}
             />
@@ -149,8 +245,8 @@ class Step extends Component {
             />,
             <CardFuncButton
               key={1}
-              icon={<X size={18} />}
-              text='Delete'
+              icon={<Delete size={18} />}
+              text=''
               clickHandle={()=> this.props.removeStep(this.props.stepNum)}
             />
           ]}

@@ -26,7 +26,7 @@ export default class Content extends Component {
               <Route path={uriSubDir + '/FormContent/:id'} render={(props) => {
                 return <FormContent {...props} title={formTitle} formStructure={formData} frequency='3'/>
               }} />
-              <Route path={uriSubDir + '/build_form'} component={FormBuilder}/>
+              <Route path={uriSubDir + '/build_form/:id'} component={FormBuilder}/>
               <Route path={uriSubDir + '/settings'} component={SettingsCard} />
               <Route component={Site} />
       </Switch>

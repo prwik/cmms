@@ -68,7 +68,8 @@ class CardFuncButton extends Component {
         <span className='card_btn' onClick={ this.props.clickHandle}>
           {this.props.icon}
           <span className='spacer'></span>
-          {this.props.text}
+          <span>{this.props.text}</span>
+          <span className='spacer2'></span>
         </span>
     );
   }
