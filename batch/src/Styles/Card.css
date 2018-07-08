@@ -26,7 +26,9 @@
   grid-area: header;
   padding: 7px;
   margin: 0px;
-  background: #F0F0F0;
+  /* background: #F0F0F0; */
+  background: #2196F3;
+  color: #fff;
 }
 
 .card_content{
