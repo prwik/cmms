@@ -8,6 +8,7 @@ export default class Equipment extends Component {
 	      equipment: null
 	    };
 	    this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/test_equipment?id=';
+
 	}
 
 	componentDidMount(){
@@ -17,14 +18,14 @@ export default class Equipment extends Component {
 	        this.setState({
 	        	equipment: responseJson.map((value,key)=>(
 	        		<EquipmentCard
-						key={key}
-						serial={value.serial_number}
-						manufacturer={value.manufacturer}
-						name={value.name}
-						description={value.description}
-						id={value.id}
-					/>
-				))
+								key={key}
+								serial={value.serial_number}
+								manufacturer={value.manufacturer}
+								name={value.name}
+								description={value.description}
+								id={value.id}
+							/>
+						))
 	        });
 	    });
 	}
@@ -32,8 +33,10 @@ export default class Equipment extends Component {
 	render(){
 		return(
 			<div>
-				{this.state.equipment}
-			</div>
+				<div>
+					{this.state.equipment}
+				</div>
+		  </div>
 		);
 	}
 }

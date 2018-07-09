@@ -1,0 +1,24 @@
+.pop-up{
+  background-color: #fff;
+  grid-area: pop-up;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.overlay{
+  height: 100%;
+  width: 100%;
+  background-color: #00000069;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  display: grid;
+  grid-template-columns: 1fr 300px 1fr;
+  grid-template-rows: 1fr 100px 1fr;
+  grid-column-gap: 3px;
+  grid-template-areas:
+  ". . ."
+  ". pop-up ."
+  ". . ."
+}

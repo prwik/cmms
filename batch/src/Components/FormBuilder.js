@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../Styles/FormBuilder.css';
 import { Card, CardFooter, CardFuncButton } from './Card';
 import { Save, Edit2, PlusCircle, Delete, CornerDownRight } from 'react-feather';
+import Modal from './Modal';
 
 export default class FormBuilder extends Component {
   constructor(props) {
@@ -10,10 +11,12 @@ export default class FormBuilder extends Component {
       numSteps: 1,
       steps:[],
       formData: {},
-      id: null
+      id: null,
+      showModal: false
     };
 
     this.addStep = this.addStep.bind(this);
+    this.hideModal = this.hideModal.bind(this);
     this.removeStep = this.removeStep.bind(this);
     this.changeStep = this.changeStep.bind(this);
     this.submitData = this.submitData.bind(this);
@@ -122,13 +125,25 @@ export default class FormBuilder extends Component {
       this.setState({
         id: resJson.id
       });
+      this.setState({showModal: true});
     })
     .catch((error) => { this.setState({ hasError: true })})
   }
 
+  hideModal() {
+    this.setState({showModal: false});
+  }
+
   render() {
+    var modal;
+    if(this.state.showModal) {
+      modal = <Modal text="Data Saved!" hideFunc={this.hideModal}/>;
+    } else {
+      modal = <div/>;
+    }
     return (
       <div>
+        {modal}
         <div>
           {this.state.steps}
         </div>
