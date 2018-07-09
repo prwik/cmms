@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import { Link } from 'react-router-dom';
 import { Card, CardTitle, CardContent, CardFooter } from './Card';
 
 export default class SiteCard extends Component {

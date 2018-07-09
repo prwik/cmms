@@ -13,6 +13,17 @@ class Card extends Component {
   }
 }
 
+class CardEmpty extends Component {
+
+  render(){
+    return (
+      <div className='card-empty'>
+          {this.props.children}
+      </div>
+    );
+  }
+}
+
 class CardTitle extends Component {
 
   render(){
@@ -76,4 +87,4 @@ class CardFuncButton extends Component {
 }
 
 
-export { Card, CardTitle, CardContent, CardFooter, CardLinkButton, CardFuncButton }
+export { Card, CardTitle, CardContent, CardFooter, CardLinkButton, CardFuncButton, CardEmpty }

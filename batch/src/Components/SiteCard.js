@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Card, CardTitle, CardContent, CardFooter, CardLinkButton } from './Card';
 import { uriSubDir } from '../Data/globalVars'
 import { Clipboard } from 'react-feather';

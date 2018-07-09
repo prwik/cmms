@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Site from './Site';
 import Equipment from './Equipment';
 import { Route, Switch } from 'react-router-dom';
-import LoginCard from './LoginCard';
 import FormInput from './FormInput';
 import FormContent from './FormContent';
 import FormBuilder from './FormBuilder';
+import FormViewer from './FormViewer';
 import Callback from './Callback';
 import SettingsCard from './SettingsCard';
 import { formData, formTitle } from '../Data/FormData';
@@ -28,6 +28,7 @@ export default class Content extends Component {
               }} />
               <Route path={uriSubDir + '/build_form/:id'} component={FormBuilder}/>
               <Route path={uriSubDir + '/settings'} component={SettingsCard} />
+              <Route path={uriSubDir + '/view_form/:id'} component={FormViewer}/>
               <Route component={Site} />
       </Switch>
     </div>

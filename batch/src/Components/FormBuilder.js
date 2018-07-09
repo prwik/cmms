@@ -100,10 +100,11 @@ export default class FormBuilder extends Component {
   }
 
   submitData() {
+    var id;
     if(this.state.id === null){
-      var id = 'none';
+      id = 'none';
     } else {
-      var id = this.state.id;
+      id = this.state.id;
     }
 
     const data = {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Card, CardTitle, CardContent, CardFooter, CardLinkButton } from './Card';
-import { Link } from 'react-router-dom';
 import { uriSubDir } from '../Data/globalVars';
 import { FileText, CheckSquare } from 'react-feather';
 
@@ -19,7 +18,7 @@ export default class EquipmentCard extends Component {
             <CardLinkButton
               key={0}
               icon={<FileText size={18}/>}
-              link={uriSubDir + '/build_form/' + this.props.id}
+              link={uriSubDir + '/view_form/' + this.props.id}
               text={'Checklist'}
             />
           ]}/>

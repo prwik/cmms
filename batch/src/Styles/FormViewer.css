@@ -1,0 +1,29 @@
+.form-content{
+  padding: 20px;
+  padding-bottom: 10px;
+}
+
+.step-row{
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+}
+
+.hspacer{
+  margin: 15px;
+}
+
+.step-row input[type=text]{
+  height: 25px;
+}
+.buttons{
+  color: #8a8a8a;
+  cursor: pointer;
+  margin-right: 20px;
+  margin: 5px;
+}
+
+.buttons a{
+  color: #8a8a8a;
+  text-decoration: none;
+}
