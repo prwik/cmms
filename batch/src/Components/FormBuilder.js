@@ -149,9 +149,11 @@ export default class FormBuilder extends Component {
           {this.state.steps}
         </div>
         <div className='add-btn'>
-          <PlusCircle onClick={this.addStep} color={'#9E9E9E'}/>
+          {/* <PlusCircle onClick={this.addStep} color={'#9E9E9E'}/> */}
+          <span className='btn' onClick={this.addStep}>Add Step</span>
           <span className='hspacer-big'/>
-          <CornerDownRight onClick={this.submitData} color={'#9E9E9E'}/>
+          {/* <CornerDownRight onClick={this.submitData} color={'#9E9E9E'}/> */}
+          <span className='btn' onClick={this.submitData} >Submit</span>
         </div>
       </div>
     );
