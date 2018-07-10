@@ -10,9 +10,7 @@ export default class Modal extends Component {
   render() {
     return (
       <div className='overlay' onClick={this.props.hideFunc}>
-        <div className='pop-up'>
-          {this.props.text}
-        </div>
+        <div className='pop-up'>{this.props.text}</div>
       </div>
     );
   }
