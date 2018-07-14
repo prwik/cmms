@@ -1,26 +1,12 @@
 import React, { Component } from 'react';
 import { FormShortText, FormLongText, FormCheckBox } from './FormTypes';
 import { Card, CardTitle, CardContent, CardButton } from './Card';
+import { Form } from './Form';
 
-export default class FormInput extends Component {
+export default class FormInput extends Form {
   constructor(props) {
     super(props);
-    this.api = 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/api/';
-    this.endpoint = 'check_lists'
-    this.title = props.title;
-    this.equipId = props.match.params.id;
-    this.period = props.period;
     this.formType = 'value';
-
-    this.state = {
-      formStructure: props.formStructure,
-      isEditable: false,
-      hasError: false
-    }
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleEditable = this.handleEditable.bind(this);
   }
 
   handleChange(e, idx) {
