@@ -113,3 +113,7 @@ body{
 a {
   cursor: pointer;
 }
+
+select {
+  background-color: #fff;
+}

@@ -32,6 +32,7 @@ export default class FormContent extends Component {
       .then((results) => results.json())
       .then((resJson) => {
         if(resJson.length > 0) {
+          console.log(resJson);
           this.setState({
             id: resJson[0].id,
             formStructure: resJson[0].form_data
