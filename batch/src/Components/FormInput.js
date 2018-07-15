@@ -7,7 +7,7 @@ import { Form } from './Form';
 export default class FormInput extends Form {
   constructor(props) {
     super(props);
-    this.formType = 'value';
+    //this.formType = 'value';
 
     this.handleValueChange = this.handleValueChange.bind(this);
     this.handleTypeChange = this.handleTypeChange.bind(this);
@@ -46,7 +46,7 @@ export default class FormInput extends Form {
       return (
         <div key={idx}>
           <TagName
-            title={item.name}
+            title={item.instruction}
             value={item.value}
             handleChange={(e) => {this.handleValueChange(e, idx)}}
            />
@@ -85,7 +85,7 @@ export default class FormInput extends Form {
       var formData = this.state.formStructure.map((i, idx) => {
         return (
           <div key={idx}>
-            <p>{i.name}: {i.value}</p>
+            <p>{i.instruction}: {i.value}</p>
           </div>
         )
       });

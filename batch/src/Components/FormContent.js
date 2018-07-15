@@ -7,8 +7,8 @@ import { Form } from './Form';
 export default class FormContent extends Form {
   constructor(props) {
     super(props);
-    this.formType = 'template';
-    this.equipId = props.match.params.id;
+    //this.formType = 'template';
+    //this.equipId = props.match.params.id;
 
     this.handleValueChange = this.handleValueChange.bind(this);
     this.handleTypeChange = this.handleTypeChange.bind(this);
@@ -39,8 +39,8 @@ export default class FormContent extends Form {
               <div>
                 <FormShortText
                   title='Input Name'
-                  value={item.name}
-                  handleChange={(e) => {this.handleValueChange(e, idx)}}
+                  value={item.instruction}
+                  handleChange={(e) => {this.handleInstructionChange(e, idx)}}
                 />
                 <FormDropDown
                   title={'Input Type'}
@@ -98,13 +98,13 @@ export default class FormContent extends Form {
   viewForm(formData) {
     function typeConversion(i){
       if (i.type === 'FormShortText') {
-        return <FormShortText title={i.name} readOnly='true'/>
+        return <FormShortText title={i.instruction} readOnly='true'/>
       }
       else if (i.type === 'FormLongText') {
-        return <FormLongText title={i.name} readOnly='true'/>
+        return <FormLongText title={i.instruction} readOnly='true'/>
       }
       else if (i.type === 'FormCheckBox') {
-        return <FormCheckBox title={i.name} readOnly='true'/>
+        return <FormCheckBox title={i.instruction} readOnly='true'/>
       }
     }
 

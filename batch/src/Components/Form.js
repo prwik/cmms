@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { FormShortText, FormCheckBox, FormDropDown } from './FormTypes';
 import { Card, CardTitle, CardContent, CardButton } from './Card';
 
-
 class Form extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +13,7 @@ class Form extends Component {
     this.inputTypes = ['FormShortText', 'FormLongText', 'FormCheckBox'];
 
     this.state = {
-      formStructure: props.formStructure,
+      formStructure: [],
       isEditable: false,
       hasError: false,
       id: null
@@ -38,16 +37,16 @@ class Form extends Component {
   }
 
   /*** FormContent ***/
-  handleValueChange(e, idx) {
+  handleInstructionChange(e, idx) {
     const target = e.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    //const name = target.name;
 
     let new_state = this.state.formStructure;
 
     const formObject = {
       type: this.state.formStructure[idx].type,
-      name: value,
+      instruction: value,
       value: this.state.formStructure[idx].value,
     }
 
@@ -60,14 +59,32 @@ class Form extends Component {
   handleTypeChange(e, idx) {
     const target = e.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    //const name = target.name;
 
     let new_state = this.state.formStructure;
 
     const formObject = {
       type: value,
-      name: this.state.formStructure[idx].name,
+      instruction: this.state.formStructure[idx].instruction,
       value: this.state.formStructure[idx].value,
+    }
+
+    new_state[idx] = formObject;
+
+    this.setState({ formStructure: new_state });
+  }
+
+  handleValueChange(e, idx) {
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    //const name = target.name;
+
+    let new_state = this.state.formStructure;
+
+    const formObject = {
+      type: this.state.formStructure[idx].type,
+      instruction: this.state.formStructure[idx].instruction,
+      value: value,
     }
 
     new_state[idx] = formObject;
@@ -79,7 +96,7 @@ class Form extends Component {
   handleAdd() {
     this.setState({
       formStructure: this.state.formStructure.concat([{
-        name: '',
+        instruction: '',
         value: '',
         type: 'FormShortText'
       }])
@@ -100,15 +117,63 @@ class Form extends Component {
     })
   }
 
+  handleSubmit() {
+    var id;
+    if(this.state.id === null){
+      id = 'none';
+    } else {
+      id = this.state.id;
+    }
+
+    const data = {
+      equipmentId: this.equipId,
+      data: this.state.formStructure,
+      id: id
+    }
+
+    console.log(data);
+    // 'http://127.0.0.1:5000'
+    fetch(this.api + this.endpoint, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    })
+    .then((response) => response.json())
+    .then((resJson) => {
+      this.setState({
+        id: resJson.id
+      });
+      this.setState({showModal: true});
+    })
+    .catch((error) => { this.setState({ hasError: true })})
+    if(!this.state.hasError){
+      this.handleEditable()
+    }
+    console.log(JSON.stringify(data));
+  }
   /*** FormContent/FormValue ***/
+  /*
   handleSubmit(e) {
     e.preventDefault();
+
+    var id;
+    if(this.state.id === null){
+      id = 'none';
+    } else {
+      id = this.state.id;
+    }
+
     const data = {
-      title: this.title,
-      equipId: this.equipId,
-      period: this.period,
-      formType: this.formType,
-      form_data: this.state.formStructure
+      //title: this.title,
+      equipId: this.equipId,  
+      data: this.state.formStructure.data,
+      id: id
+      //period: this.period,
+      //formType: this.formType,
+
     }
 
     fetch(this.api + this.endpoint, {
@@ -124,6 +189,8 @@ class Form extends Component {
     }
     console.log(JSON.stringify(data));
   }
+  */
+
 
   /*** FormContent/FormValue ***/
     formError() {
