@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-//import { Link } from 'react-router-dom';
-import { Card, CardTitle, CardContent, CardButton } from './Card';
+import { Card, CardTitle, CardContent, CardFooter } from './Card';
 
 export default class SiteCard extends Component {
   render(){
@@ -9,7 +8,7 @@ export default class SiteCard extends Component {
         <Card>
           <CardTitle text={'Settings'}></CardTitle>
           <CardContent text={'Settings will be here...'} />
-            <CardButton text={'Button Test'}>Test Button</CardButton>
+            <CardFooter text={'Button Test'}>Test Button</CardFooter>
         </Card>
       </div>
     );

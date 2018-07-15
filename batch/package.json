@@ -10,6 +10,7 @@
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
+    "react-feather": "^1.1.1",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
     "reactstrap": "^5.0.0-beta.3"
@@ -19,5 +20,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "homepage": "http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/test"
 }

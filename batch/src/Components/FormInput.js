@@ -1,59 +1,31 @@
 import React, { Component } from 'react';
 import { FormShortText, FormLongText, FormCheckBox } from './FormTypes';
-import { Card, CardTitle, CardContent, CardButton } from './Card';
+import { Card, CardTitle, CardContent, CardButton, CardFooter, CardFuncButton } from './Card';
+import { Edit2, Delete, Plus, Send } from 'react-feather';
 import { Form } from './Form';
 
 export default class FormInput extends Form {
   constructor(props) {
     super(props);
     this.formType = 'value';
+
+    this.handleValueChange = this.handleValueChange.bind(this);
+    this.handleTypeChange = this.handleTypeChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEditable = this.handleEditable.bind(this);
   }
 
-  handleChange(e, idx) {
-    const target = e.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    const formObject = {
-      name: name,
-      value: value,
-      type: this.state.formStructure[idx].type
-    }
-
-    let new_state = this.state.formStructure;
-    new_state[idx] = formObject;
-
-    this.setState({ formStructure: new_state });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    const data = {
-      title: this.title,
-      equipId: this.equipId,
-      period: this.period,
-      formType: this.formType,
-      data: this.state.formStructure
-    }
-
-    fetch(this.api + this.endpoint, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data)
-    }).catch((error) => { this.setState({ hasError: true })})
-    if(!this.state.hasError){
-      this.handleEditable()
-    }
-    console.log(JSON.stringify(data));
-  }
-
-  handleEditable() {
-    this.setState({
-      isEditable: !this.state.isEditable
-    })
+  componentDidMount() {
+    fetch(this.api + '/form_data?equipId=' + this.equipId)
+      .then((results) => results.json())
+      .then((resJson) => {
+        if(resJson.length > 0) {
+          this.setState({
+            id: resJson[0].id,
+            formStructure: resJson[0].form_data
+          });
+      }
+      });
   }
 
   buildFormStructure() {
@@ -76,7 +48,7 @@ export default class FormInput extends Form {
           <TagName
             title={item.name}
             value={item.value}
-            handleChange={(e) => {this.handleChange(e, idx)}}
+            handleChange={(e) => {this.handleValueChange(e, idx)}}
            />
         </div>
       );
@@ -84,46 +56,63 @@ export default class FormInput extends Form {
     return inputs;
   }
 
-  formError() {
-    if(this.state.hasError) {
-      return (
-        <div className="form_container">Submit Error
-        </div>
-      );
+  editForm() {
+    return(
+      <Card>
+        <CardTitle text={this.title} />
+        <CardContent>
+            <FormShortText title='Frequency' value={this.daysToFrequencyName(this.frequency)} readOnly='true'/>
+            { this.buildFormStructure() }
+            <div className="form_container">
+              { this.formError() }
+            </div>
+        </CardContent>
+        <CardFooter buttons={
+          <CardFuncButton
+            text='Submit'
+            clickHandle={this.handleSubmit}
+            icon={<Send size={18}/>}
+          />
+        }/>
+      </Card>
+    );
+  }
+
+  viewForm() {
+    if(this.state.formStructure === null) {
+      var formData = <div/>
+    } else {
+      var formData = this.state.formStructure.map((i, idx) => {
+        return (
+          <div key={idx}>
+            <p>{i.name}: {i.value}</p>
+          </div>
+        )
+      });
     }
+
+    return(
+      <Card>
+        <CardTitle text={this.title} />
+        <CardContent>
+          <FormShortText title='Frequency' value={this.daysToFrequencyName(this.frequency)} readOnly='true'/>
+          {formData}
+        </CardContent>
+        <CardFooter buttons={
+          <CardFuncButton
+            text='Edit'
+            clickHandle={this.handleEditable}
+            icon={<Edit2 size={18}/>}
+          />
+        }/>
+      </Card>
+    );
   }
 
   render() {
     if (this.state.isEditable) {
-      return (
-        <Card>
-          <CardTitle text={this.title} />
-          <CardContent>
-            <form className="form" onSubmit={this.handleSubmit}>
-              { this.buildFormStructure() }
-              { this.formError() }
-              <div className="form_container"><input type="submit" text="Submit"/></div>
-            </form>
-          </CardContent>
-        </Card>
-      );
+      return this.editForm();
     }
-    return (
-      <Card>
-        <CardTitle text={this.title} />
-        <CardContent>
-        {
-          this.state.formStructure.map((i, idx) => {
-            return (
-              <div key={idx}>
-              <p>{i.name}: {i.value}</p>
-              </div>
-            )
-          })
-        }
-        <a onClick={this.handleEditable}>Edit</a>
-        </CardContent>
-      </Card>
-    );
+      return this.viewForm();
   }
 }

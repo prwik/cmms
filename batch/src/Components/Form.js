@@ -19,7 +19,6 @@ class Form extends Component {
       hasError: false,
       id: null
     }
-
     this.handleValueChange = this.handleValueChange.bind(this);
     this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -56,6 +55,7 @@ class Form extends Component {
 
     this.setState({ formStructure: new_state });
   }
+
   /*** FormContent ***/
   handleTypeChange(e, idx) {
     const target = e.target;
@@ -108,7 +108,7 @@ class Form extends Component {
       equipId: this.equipId,
       period: this.period,
       formType: this.formType,
-      data: this.state.formStructure
+      form_data: this.state.formStructure
     }
 
     fetch(this.api + this.endpoint, {
@@ -134,6 +134,21 @@ class Form extends Component {
       );
     }
   }
+
+  daysToFrequencyName(days){
+    switch(days){
+      case '7':
+        return 'Weekly';
+      case '30':
+        return 'Monthly';
+      case '90':
+        return 'Quarterly';
+      case '365':
+        return 'Yearly';
+      default:
+        return days;
+    }
+  }
 }
 
-export { Form }
+export { Form };	

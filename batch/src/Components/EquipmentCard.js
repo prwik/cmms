@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Card, CardTitle, CardContent } from './Card';
-import { Link } from 'react-router-dom';
+import { Card, CardTitle, CardContent, CardFooter, CardLinkButton } from './Card';
+import { uriSubDir } from '../Data/globalVars';
+import { FileText, CheckSquare } from 'react-feather';
 
 export default class EquipmentCard extends Component {
 
@@ -13,15 +14,14 @@ export default class EquipmentCard extends Component {
             <CardContent text={ this.props.manufacturer } />
             <CardContent text={ this.props.description } />
           </CardContent>
-          <Link to={'/form/' + this.props.id}>
-            <div className="card_buttons">Check List</div>
-          </Link>
-          <Link to={'/FormContent/' + this.props.id}>
-            <div className="card_button">New</div>
-          </Link>
-          <Link to='/'>
-            <div className="card_buttons">New Entry</div>
-          </Link>
+          <CardFooter buttons={[
+            <CardLinkButton
+              key={0}
+              icon={<FileText size={18}/>}
+              link={uriSubDir + '/view_form/' + this.props.id}
+              text={'Checklist'}
+            />
+          ]}/>
         </Card>
       </div>
     );

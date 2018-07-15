@@ -2,52 +2,34 @@ import React, { Component } from 'react';
 import Site from './Site';
 import Equipment from './Equipment';
 import { Route, Switch } from 'react-router-dom';
-import LoginCard from './LoginCard';
 import FormInput from './FormInput';
 import FormContent from './FormContent';
-import CheckList from './CheckList';
+import FormBuilder from './FormBuilder';
+import FormViewer from './FormViewer';
 import Callback from './Callback';
 import SettingsCard from './SettingsCard';
 import { formData, formTitle } from '../Data/FormData';
+import { uriSubDir } from '../Data/globalVars'
 
 export default class Content extends Component {
-  handleAuthentication(nextState, replace){
-    if (/access_token|id_token|error/.test(nextState.location.hash)) {
-      this.props.auth.handleAuthentication();
-    }
-  }
 
   render() {
   	return (
   	<div className="body-content">
   		<Switch>
-        {
-          !this.props.auth.isAuthenticated() && (
-            <div>
-              <Route path='/' component={LoginCard} />
-              <Route path="/callback" render={(props) => {
-                this.handleAuthentication(props);
-                return <Callback {...this.props} />
+              <Route exact path={uriSubDir + '/test/'} component={Site} />
+              <Route exact path={uriSubDir + '/sites'} component={Site} />
+              <Route path={uriSubDir + '/equip/:id'} component={Equipment} />
+              <Route path={uriSubDir + '/FormInput/:id'} render={(props) => {
+                return <FormInput {...props} title={formTitle} formStructure={formData} frequency='365'/>
               }} />
-            </div>
-          )
-        }
-        {
-          this.props.auth.isAuthenticated() && (
-            <div>
-              <Route exact path='/' component={Site} />
-              <Route path='/equip/:id' component={Equipment} />
-              <Route path='/FormInput/:id' render={(props) => {
-                return <FormInput {...props} title={formTitle} formStructure={formData} period='1'/>
+              <Route path={uriSubDir + '/FormContent/:id'} render={(props) => {
+                return <FormContent {...props} title={formTitle} formStructure={formData} frequency='365'/>
               }} />
-              <Route path='/FormContent/:id' render={(props) => {
-                return <FormContent {...props} title={formTitle} formStructure={formData} period='3' />
-              }} />
-              <Route path='/form/:id' component={CheckList}/>
-              <Route path='/settings' component={SettingsCard} />
-            </div>
-          )
-        }
+              <Route path={uriSubDir + '/build_form/:id'} component={FormBuilder}/>
+              <Route path={uriSubDir + '/settings'} component={SettingsCard} />
+              <Route path={uriSubDir + '/view_form/:id'} component={FormViewer}/>
+              <Route component={Site} />
       </Switch>
     </div>
     )

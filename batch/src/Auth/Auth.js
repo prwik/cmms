@@ -7,6 +7,7 @@ export default class Auth {
     domain: 'cmms.auth0.com',
     clientID: 'FGbSe9avaZ__9UkKDgF5EihNz_OA_F_I',
     redirectUri: 'http://localhost:3000/callback',
+    // redirectUri: 'http://ec2-34-217-104-207.us-west-2.compute.amazonaws.com/test',
     audience: 'https://cmms.auth0.com/userinfo',
     responseType: 'token id_token',
     scope: 'openid'
@@ -55,7 +56,7 @@ export default class Auth {
   }
 
   isAuthenticated() {
-    // Check whether the current time is past the 
+    // Check whether the current time is past the
     // Access Token's expiry time
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
