@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
 import '../Styles/FormBuilder.css';
 import { Card, CardFooter, CardFuncButton } from './Card';
 import { Save, Edit2, PlusCircle, Delete, CornerDownRight } from 'react-feather';
 import Modal from './Modal';
-import { uriSubDir } from '../Data/globalVars';
 
 export default class FormBuilder extends Component {
   constructor(props) {
@@ -135,7 +133,6 @@ export default class FormBuilder extends Component {
 
   hideModal() {
     this.setState({showModal: false});
-    window.location.href = uriSubDir + '/view_form/' + this.equipId;
   }
 
   render() {

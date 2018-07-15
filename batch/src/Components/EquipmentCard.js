@@ -18,7 +18,7 @@ export default class EquipmentCard extends Component {
             <CardLinkButton
               key={0}
               icon={<FileText size={18}/>}
-              link={uriSubDir + '/view_form/' + this.props.id}
+              link={uriSubDir + '/FormContent/' + this.props.id}
               text={'Checklist'}
             />
           ]}/>
