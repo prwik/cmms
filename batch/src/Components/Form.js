@@ -46,9 +46,9 @@ class Form extends Component {
     let new_state = this.state.formStructure;
 
     const formObject = {
+      type: this.state.formStructure[idx].type,
       name: value,
       value: this.state.formStructure[idx].value,
-      type: this.state.formStructure[idx].type
     }
 
     new_state[idx] = formObject;
@@ -65,9 +65,9 @@ class Form extends Component {
     let new_state = this.state.formStructure;
 
     const formObject = {
+      type: value,
       name: this.state.formStructure[idx].name,
       value: this.state.formStructure[idx].value,
-      type: value
     }
 
     new_state[idx] = formObject;
