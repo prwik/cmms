@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { FormShortText, FormLongText, FormCheckBox, FormDropDown } from './FormTypes';
 import { Card, CardTitle, CardContent, CardFooter, CardFuncButton } from './Card';
 import { Edit2, Delete, Plus, Send } from 'react-feather';
@@ -33,32 +33,37 @@ export default class FormContent extends Form {
   buildFormStructure() {
     if(this.state.formStructure !== null) {
       var inputs = this.state.formStructure.map((item, idx) => {
-        return (
-          <Card key={idx}>
-            <CardContent>
-              <div>
-                <FormShortText
-                  title='Input Name'
-                  value={item.instruction}
-                  handleChange={(e) => {this.handleInstructionChange(e, idx)}}
+        if (item === null) {
+          return;
+        }
+        else {
+          return (
+            <Card key={idx}>
+              <CardContent>
+                <div>
+                  <FormShortText
+                    title='Input Name'
+                    value={item.instruction}
+                    handleChange={(e) => {this.handleInstructionChange(e, idx)}}
+                  />
+                  <FormDropDown
+                    title={'Input Type'}
+                    value={item.type}
+                    optionArray={this.inputTypes}
+                    handleChange={(e) => {this.handleTypeChange(e, idx)}}
+                  />
+                </div>
+              </CardContent>
+              <CardFooter buttons={
+                <CardFuncButton
+                  text='Delete'
+                  clickHandle={() => {(this.handleRemove(idx))}}
+                  icon={<Delete size={18}/>}
                 />
-                <FormDropDown
-                  title={'Input Type'}
-                  value={item.type}
-                  optionArray={this.inputTypes}
-                  handleChange={(e) => {this.handleTypeChange(e, idx)}}
-                />
-              </div>
-            </CardContent>
-            <CardFooter buttons={
-              <CardFuncButton
-                text='Delete'
-                clickHandle={() => {(this.handleRemove(idx))}}
-                icon={<Delete size={18}/>}
-              />
-            }/>
-          </Card>
-        );
+              }/>
+            </Card>
+          );
+        }
       });
     } else {
       var inputs = '';
@@ -97,14 +102,20 @@ export default class FormContent extends Form {
 
   viewForm(formData) {
     function typeConversion(i){
-      if (i.type === 'FormShortText') {
-        return <FormShortText title={i.instruction} readOnly='true'/>
+      if (i === null) {
+        return;
       }
-      else if (i.type === 'FormLongText') {
-        return <FormLongText title={i.instruction} readOnly='true'/>
-      }
-      else if (i.type === 'FormCheckBox') {
-        return <FormCheckBox title={i.instruction} readOnly='true'/>
+      else {
+        if (i.type === 'FormShortText') {
+          return <FormShortText title={i.instruction} readOnly='true'/>
+        }
+        else if (i.type === 'FormLongText') {
+          return <FormLongText title={i.instruction} readOnly='true'/>
+        }
+        else if (i.type === 'FormCheckBox') {
+          return <FormCheckBox title={i.instruction} readOnly='true'/>
+        }
+        else return;
       }
     }
 

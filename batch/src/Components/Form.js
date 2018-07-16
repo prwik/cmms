@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { FormShortText, FormCheckBox, FormDropDown } from './FormTypes';
-import { Card, CardTitle, CardContent, CardButton } from './Card';
+//import { FormShortText, FormCheckBox, FormDropDown } from './FormTypes';
+//import { Card, CardTitle, CardContent, CardButton } from './Card';
 
 class Form extends Component {
   constructor(props) {

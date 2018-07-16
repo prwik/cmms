@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { FormShortText, FormLongText, FormCheckBox } from './FormTypes';
 import { Card, CardTitle, CardContent, CardButton, CardFooter, CardFuncButton } from './Card';
 import { Edit2, Delete, Plus, Send } from 'react-feather';
@@ -43,15 +43,31 @@ export default class FormInput extends Form {
       else {
         TagName = FormShortText;
       }
-      return (
-        <div key={idx}>
-          <TagName
-            title={item.instruction}
-            value={item.value}
-            handleChange={(e) => {this.handleValueChange(e, idx)}}
-           />
-        </div>
-      );
+
+      if (this.state.isEditable) {
+        return (
+          <div key={idx}>
+            <TagName
+              title={item.instruction}
+              value={item.value}
+              handleChange={(e) => {this.handleValueChange(e, idx)}}
+             />
+          </div>
+        );
+      }
+      else {
+        return (
+          <div key={idx}>
+            <TagName
+              title={item.instruction}
+              value={item.value}
+              handleChange={(e) => {this.handleValueChange(e, idx)}}
+              readOnly
+             />
+          </div>
+        )
+      }
+
     });
     return inputs;
   }
@@ -79,24 +95,12 @@ export default class FormInput extends Form {
   }
 
   viewForm() {
-    if(this.state.formStructure === null) {
-      var formData = <div/>
-    } else {
-      var formData = this.state.formStructure.map((i, idx) => {
-        return (
-          <div key={idx}>
-            <p>{i.instruction}: {i.value}</p>
-          </div>
-        )
-      });
-    }
-
     return(
       <Card>
         <CardTitle text={this.title} />
         <CardContent>
           <FormShortText title='Frequency' value={this.daysToFrequencyName(this.frequency)} readOnly='true'/>
-          {formData}
+          { this.buildFormStructure() }
         </CardContent>
         <CardFooter buttons={
           <CardFuncButton
