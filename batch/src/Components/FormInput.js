@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormShortText, FormLongText, FormCheckBox } from './FormTypes';
-import { Card, CardTitle, CardContent, CardButton, CardFooter, CardFuncButton } from './Card';
-import { Edit2, Delete, Plus, Send } from 'react-feather';
+import { Card, CardTitle, CardContent, CardFooter, CardFuncButton } from './Card';
+import { Edit2, Send } from 'react-feather';
 import { Form } from './Form';
 
 export default class FormInput extends Form {

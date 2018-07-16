@@ -34,7 +34,7 @@ export default class FormContent extends Form {
     if(this.state.formStructure !== null) {
       var inputs = this.state.formStructure.map((item, idx) => {
         if (item === null) {
-          return;
+          return <div/>;
         }
         else {
           return (
@@ -66,7 +66,7 @@ export default class FormContent extends Form {
         }
       });
     } else {
-      var inputs = '';
+      inputs = '';
     }
     return inputs;
   }
